@@ -1,0 +1,23 @@
+---
+export interface Props {
+  icon: string;
+  title: string;
+  description: string;
+  variant?: "primary" | "secondary";
+}
+
+const { icon, title, description, variant = "primary" } = Astro.props;
+
+const variantClasses = {
+  primary: "bg-primary/5 text-primary hover:bg-primary hover:text-primary-foreground",
+  secondary: "bg-secondary/10 text-secondary-dark hover:bg-secondary hover:text-secondary-foreground",
+};
+---
+
+<div class={`border-none shadow-soft transition-all duration-300 hover:shadow-card-hover group cursor-pointer text-center h-full flex flex-col bg-white rounded-lg ${variantClasses[variant]}`}>
+  <div class="pt-8 flex flex-col items-center flex-grow p-6">
+    <div class="mb-4 transition-transform duration-300 group-hover:scale-110" set:html={icon}></div>
+    <h3 class="text-xl font-bold mb-2">{title}</h3>
+    <p class="text-sm opacity-80 flex-grow">{description}</p>
+  </div>
+</div>
