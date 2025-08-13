@@ -1,0 +1,177 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionContainer from '../components/SectionContainer.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+---
+
+<Layout title="Contact - PREVICARE EMPLOI">
+  <main class="flex min-h-screen flex-col items-center bg-accent">
+    <!-- Hero Section -->
+    <SectionContainer background="gradient-primary" className="text-primary-foreground py-24" transition:name="hero">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
+          Contactez-nous
+        </h1>
+        <p class="mt-6 max-w-[700px] mx-auto text-xl text-primary-foreground/90">
+          Notre équipe est à votre disposition pour répondre à toutes vos questions.
+        </p>
+      </div>
+    </SectionContainer>
+
+    <!-- Contact Form Section -->
+    <SectionContainer background="white">
+      <div class="grid gap-12 lg:grid-cols-2 items-start">
+        <div class="space-y-6">
+          <SectionTitle
+            title="Envoyez-nous un message"
+            badge="Contact"
+            align="left"
+            badgeVariant="primary"
+          />
+
+          <form class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="space-y-2">
+                <label for="firstName" class="text-sm font-medium text-primary">Prénom</label>
+                <input 
+                  type="text" 
+                  id="firstName" 
+                  name="firstName"
+                  class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                  placeholder="Votre prénom"
+                  required
+                />
+              </div>
+              <div class="space-y-2">
+                <label for="lastName" class="text-sm font-medium text-primary">Nom</label>
+                <input 
+                  type="text" 
+                  id="lastName" 
+                  name="lastName"
+                  class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                  placeholder="Votre nom"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <label for="email" class="text-sm font-medium text-primary">Email</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email"
+                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                placeholder="votre.email@exemple.com"
+                required
+              />
+            </div>
+
+            <div class="space-y-2">
+              <label for="subject" class="text-sm font-medium text-primary">Sujet</label>
+              <select 
+                id="subject" 
+                name="subject"
+                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                required
+              >
+                <option value="">Sélectionnez un sujet</option>
+                <option value="information">Demande d'information</option>
+                <option value="support">Support technique</option>
+                <option value="partenariat">Partenariat</option>
+                <option value="autre">Autre</option>
+              </select>
+            </div>
+
+            <div class="space-y-2">
+              <label for="message" class="text-sm font-medium text-primary">Message</label>
+              <textarea 
+                id="message" 
+                name="message"
+                rows="6"
+                class="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                placeholder="Décrivez votre demande..."
+                required
+              ></textarea>
+            </div>
+
+            <button 
+              type="submit" 
+              class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary-dark shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all duration-300 h-11 rounded-md px-8 w-full"
+            >
+              Envoyer le message
+            </button>
+          </form>
+        </div>
+
+        <div class="space-y-8">
+          <div class="bg-gradient-light rounded-2xl p-8">
+            <h3 class="text-2xl font-bold text-primary mb-6">Informations de contact</h3>
+
+            <div class="space-y-6">
+              <div class="flex items-start gap-4">
+                <div class="bg-primary/10 p-3 rounded-full">
+                  <svg class="h-6 w-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-primary">Adresse</h4>
+                  <p class="text-primary/80">Dakar, Sénégal</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="bg-secondary/10 p-3 rounded-full">
+                  <svg class="h-6 w-6 text-secondary-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-primary">Téléphone</h4>
+                  <p class="text-primary/80">+221 XX XXX XX XX</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="bg-tertiary/10 p-3 rounded-full">
+                  <svg class="h-6 w-6 text-tertiary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-primary">Email</h4>
+                  <p class="text-primary/80">contact@previcare.sn</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="bg-primary/10 p-3 rounded-full">
+                  <svg class="h-6 w-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-primary">Horaires</h4>
+                  <p class="text-primary/80">Lun - Ven: 8h - 18h</p>
+                  <p class="text-primary/80">Sam: 9h - 13h</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl p-6 shadow-card">
+            <h4 class="font-semibold text-primary mb-4">Support d'urgence</h4>
+            <p class="text-primary/80 mb-4">
+              Pour les situations urgentes nécessitant une assistance immédiate, contactez notre support 24/7.
+            </p>
+            <a href="tel:+221xxxxxxxxx" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-tertiary text-tertiary-foreground hover:bg-tertiary-dark shadow-lg h-11 rounded-md px-6">
+              Appeler le support
+            </a>
+          </div>
+        </div>
+      </div>
+    </SectionContainer>
+  </main>
+</Layout>

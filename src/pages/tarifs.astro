@@ -1,0 +1,230 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionContainer from '../components/SectionContainer.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../components/ui/card';
+import { Button } from '../components/ui/button';
+import { Image } from 'astro:assets';
+---
+
+<Layout title="Tarifs - PREVICARE EMPLOI">
+  <main class="flex min-h-screen flex-col">
+    <!-- Hero Section -->
+    <section class="relative w-full pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden">
+      <!-- Image de fond -->
+      <div
+        class="absolute inset-0 z-0"
+        style="background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=2036&auto=format&fit=crop'); background-size: cover; background-position: center;"
+      >
+        <!-- Overlay pour améliorer la lisibilité -->
+        <div class="absolute inset-0 bg-gradient-to-b from-secondary/90 to-secondary/70"></div>
+      </div>
+
+      <div class="container relative px-4 md:px-6 z-10">
+        <div class="flex flex-col items-center text-center space-y-4">
+          <h1 class="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-white">
+            Des formules simples et transparentes
+          </h1>
+          <p class="max-w-[700px] text-white/90 md:text-xl">
+            Choisissez le plan qui correspond à vos besoins, avec ou sans abonnement.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Cards -->
+    <SectionContainer background="accent">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto items-stretch">
+        <!-- Essentiel Plan -->
+        <Card className="border-none shadow-card flex flex-col" client:load>
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold">Essentiel</CardTitle>
+            <p class="text-gray-500">Pour les employés</p>
+            <div class="mt-4 flex items-baseline">
+              <span class="text-4xl font-extrabold tracking-tight">5.000</span>
+              <span class="ml-1 text-xl font-semibold">FCFA</span>
+              <span class="ml-1 text-sm font-medium text-gray-500">/mois</span>
+            </div>
+          </CardHeader>
+          <CardContent className="flex-grow">
+            <ul class="space-y-3">
+              {
+                [
+                  "Archivage sécurisé",
+                  "Suivi des cotisations IPRES",
+                  "Veille juridique mensuelle",
+                  "Conseil en gestion de conflits",
+                  "Support par email",
+                ].map((feature) => (
+                  <li class="flex items-start">
+                    <i class="lucide lucide-check-circle h-5 w-5 text-secondary mr-2 mt-0.5 flex-shrink-0"></i>
+                    <span>{feature}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </CardContent>
+          <CardFooter>
+            <Button className="w-full" asChild>
+              <a href="/inscription">Choisir Essentiel</a>
+            </Button>
+          </CardFooter>
+        </Card>
+
+        <!-- Premium Plan -->
+        <Card className="border-2 border-primary shadow-card flex flex-col relative" client:load>
+          <div class="absolute top-0 right-4 -mt-3 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
+            Populaire
+          </div>
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold">Premium</CardTitle>
+            <p class="text-gray-500">Pour les professionnels & expatriés</p>
+            <div class="mt-4 flex items-baseline">
+              <span class="text-4xl font-extrabold tracking-tight">15.000</span>
+              <span class="ml-1 text-xl font-semibold">FCFA</span>
+              <span class="ml-1 text-sm font-medium text-gray-500">/mois</span>
+            </div>
+          </CardHeader>
+          <CardContent className="flex-grow">
+            <ul class="space-y-3">
+              {
+                [
+                  "Tout du plan Essentiel",
+                  "Assurance défense juridique",
+                  "Conseil en gestion de carrière",
+                  "Assistance permis de travail",
+                  "2 consultations / mois",
+                  "Support prioritaire 24/7",
+                ].map((feature) => (
+                  <li class="flex items-start">
+                    <i class="lucide lucide-check-circle h-5 w-5 text-secondary mr-2 mt-0.5 flex-shrink-0"></i>
+                    <span>{feature}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </CardContent>
+          <CardFooter>
+            <Button className="w-full bg-gradient-primary hover:opacity-90" asChild>
+              <a href="/inscription">Choisir Premium</a>
+            </Button>
+          </CardFooter>
+        </Card>
+
+        <!-- Entreprise Plan -->
+        <Card className="border-none shadow-card flex flex-col" client:load>
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold">Entreprise</CardTitle>
+            <p class="text-gray-500">Pour les employeurs & délégués</p>
+            <div class="mt-4">
+              <span class="text-4xl font-extrabold tracking-tight">Sur mesure</span>
+            </div>
+          </CardHeader>
+          <CardContent className="flex-grow">
+            <ul class="space-y-3">
+              {
+                [
+                  "Package groupe pour employés",
+                  "Canal whistleblower",
+                  "Baromètre du climat social",
+                  "Médiation sociale",
+                  "Outils pour le dialogue social",
+                  "Gestionnaire de compte dédié",
+                ].map((feature) => (
+                  <li class="flex items-start">
+                    <i class="lucide lucide-check-circle h-5 w-5 text-secondary mr-2 mt-0.5 flex-shrink-0"></i>
+                    <span>{feature}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </CardContent>
+          <CardFooter>
+            <Button variant="outline" className="w-full bg-transparent" asChild>
+              <a href="/contact">Nous contacter</a>
+            </Button>
+          </CardFooter>
+        </Card>
+
+        <!-- A l'acte Plan -->
+        <Card className="border-none shadow-card flex flex-col bg-tertiary/10" client:load>
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold">À l'acte</CardTitle>
+            <p class="text-gray-500">Pour un besoin ponctuel</p>
+            <div class="mt-4">
+              <span class="text-2xl font-bold tracking-tight">Payez à l'usage</span>
+              <p class="text-gray-500 text-sm mt-1">Sans abonnement.</p>
+            </div>
+          </CardHeader>
+          <CardContent className="flex-grow">
+            <ul class="space-y-3">
+              {
+                [
+                  "Consultation juridique unique",
+                  "Coaching carrière ponctuel",
+                  "Analyse de contrat",
+                  "Paiement mobile sécurisé",
+                ].map((feature) => (
+                  <li class="flex items-start">
+                    <i class="lucide lucide-check-circle h-5 w-5 text-tertiary mr-2 mt-0.5 flex-shrink-0"></i>
+                    <span>{feature}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </CardContent>
+          <CardFooter>
+            <Button
+              variant="outline"
+              className="w-full bg-transparent border-tertiary text-tertiary hover:bg-tertiary hover:text-white"
+              asChild
+            >
+              <a href="/contact">Prendre rendez-vous</a>
+            </Button>
+          </CardFooter>
+        </Card>
+      </div>
+    </SectionContainer>
+
+    <!-- FAQ Section -->
+    <SectionContainer background="white">
+      <SectionTitle
+        title="Questions fréquentes"
+        badge="FAQ"
+        badgeVariant="secondary"
+        subtitle="Retrouvez les réponses aux questions les plus courantes sur nos offres."
+      />
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        {
+          [
+            {
+              question: "Comment puis-je changer de formule ?",
+              answer: "Vous pouvez facilement changer de formule à tout moment depuis votre espace personnel.",
+            },
+            {
+              question: "Les prix incluent-ils la TVA ?",
+              answer: "Oui, tous nos prix affichés incluent la TVA et toutes les taxes applicables au Sénégal.",
+            },
+            {
+              question: "Puis-je annuler mon abonnement ?",
+              answer: "Oui, vous pouvez annuler votre abonnement à tout moment sans frais supplémentaires.",
+            },
+            {
+              question: "Comment fonctionne le paiement à l'acte ?",
+              answer:
+                "Vous pouvez prendre rendez-vous pour une consultation unique via notre plateforme et payer de manière sécurisée par mobile money ou carte bancaire, sans abonnement.",
+            },
+          ].map((faq) => (
+            <div class="space-y-2">
+              <div class="flex items-start">
+                <i class="lucide lucide-help-circle h-5 w-5 text-primary mr-2 mt-0.5"></i>
+                <h3 class="font-semibold text-lg">{faq.question}</h3>
+              </div>
+              <p class="text-gray-600 pl-7">{faq.answer}</p>
+            </div>
+          ))
+        }
+      </div>
+    </SectionContainer>
+  </main>
+</Layout>

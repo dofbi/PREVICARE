@@ -1,0 +1,200 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { actions } from 'astro:actions';
+
+const { user } = Astro.locals;
+
+// Si l'utilisateur est déjà connecté, le rediriger vers sa page
+if (user) {
+  const userRole = user.user_metadata?.role;
+
+  // Redirect based on user role
+  if (userRole === 'employee') {
+    return Astro.redirect(user.user_metadata?.is_expatriate ? '/espace-expatries' : '/espace-employes');
+  } else if (userRole === 'employer') {
+    return Astro.redirect('/espace-employeurs');
+  } else if (userRole === 'delegate') {
+    return Astro.redirect('/espace-delegues');
+  }
+
+  return Astro.redirect('/');
+}
+
+// Gestion de la soumission du formulaire
+// Note: The following block seems to be a duplicate or intended for server-side processing that should be in actions.auth.signIn or a server-side handler.
+// The original code had a check for POST method and formData processing here, which is unusual for a client-side component file.
+// Based on the changes, it seems the intention was to remove this server-side logic from the component itself and rely on Astro actions.
+// However, the original code provided already had a check for Astro.getActionResult.
+// I will keep the original logic for checking Astro.getActionResult as it seems to be how Astro handles action results in components.
+const result = Astro.getActionResult(actions.auth.signIn);
+
+// Redirection après connexion réussie selon le rôle
+if (result && !result.error && result.data?.success) {
+  // The original code had 'const redirectUrl = result.data.redirectUrl || '/';' which was removed by the changes.
+  // The logic below directly uses result.data.redirectUrl which is correct.
+  return Astro.redirect(result.data.redirectUrl);
+}
+---
+
+<Layout title="Connexion - PREVICARE EMPLOI">
+  <main class="flex min-h-screen items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="w-full max-w-md">
+      <div class="text-center mb-8">
+        <a href="/" class="inline-block">
+          <h1 class="text-3xl font-bold text-primary">PREVICARE EMPLOI</h1>
+        </a>
+        <p class="mt-2 text-gray-600">Votre partenaire RH au Sénégal</p>
+      </div>
+
+      <div class="w-full">
+        <!-- Tabs -->
+        <div class="grid w-full grid-cols-2 mb-8 bg-gray-100 p-1 rounded-lg">
+          <button
+            class="tab-button active bg-white text-primary px-4 py-2 text-sm font-medium rounded-md transition-all"
+            data-tab="login"
+          >
+            Connexion
+          </button>
+          <a
+            href="/inscription"
+            class="tab-button text-gray-600 px-4 py-2 text-sm font-medium rounded-md transition-all text-center"
+          >
+            Inscription
+          </a>
+        </div>
+
+        <!-- Affichage des erreurs -->
+        {(result?.error || (result?.data && !result.data.success)) && (
+          <div class="mb-4 p-4 bg-red-50 border border-red-200 rounded-md">
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <svg class="h-5 w-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <div class="ml-3">
+                <h3 class="text-sm font-medium text-red-800">
+                  Erreur de connexion
+                </h3>
+                <div class="mt-1 text-sm text-red-700">
+                  <p>
+                    {result?.error?.message || result?.data?.message || 'Une erreur s\'est produite lors de la connexion.'}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <!-- Login Tab Content -->
+        <div id="login-tab" class="tab-content">
+          <div class="bg-white rounded-lg shadow-md">
+            <div class="p-6">
+              <h2 class="text-xl font-semibold mb-2">Connexion</h2>
+              <p class="text-gray-600 mb-4">Accédez à votre espace personnel PREVICARE EMPLOI</p>
+
+              <form method="POST" action={actions.auth.signIn} class="space-y-4">
+                <div class="space-y-2">
+                  <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                      <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"/>
+                      </svg>
+                    </div>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="nom@exemple.com"
+                      class="flex h-10 w-full rounded-md border border-gray-300 bg-background pl-10 px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between">
+                    <label for="password" class="block text-sm font-medium text-gray-700">Mot de passe</label>
+                    <a href="/mot-de-passe-oublie" class="text-sm text-primary hover:underline">
+                      Mot de passe oublié ?
+                    </a>
+                  </div>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                      <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                      </svg>
+                    </div>
+                    <input
+                      type="password"
+                      id="password"
+                      name="password"
+                      placeholder="••••••••"
+                      class="flex h-10 w-full rounded-md border border-gray-300 bg-background pl-10 pr-10 px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                      required
+                    />
+                    <button
+                      type="button"
+                      class="absolute inset-y-0 right-0 flex items-center pr-3 toggle-password"
+                      data-target="password"
+                    >
+                      <svg class="h-5 w-5 text-gray-400 eye-open" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                      </svg>
+                      <svg class="h-5 w-5 text-gray-400 eye-closed hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="px-6 py-4">
+                  <button
+                    type="submit"
+                    class="w-full bg-primary text-white hover:bg-primary-dark py-2 px-4 rounded-md font-medium transition-colors"
+                  >
+                    Se connecter
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <p class="mt-4 text-center text-sm text-gray-600">
+          Vous n'avez pas de compte ?
+          <a href="/inscription" class="text-primary hover:underline font-medium">
+            S'inscrire
+          </a>
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Password toggle functionality
+      const toggleButtons = document.querySelectorAll('.toggle-password');
+
+      toggleButtons.forEach(button => {
+        button.addEventListener('click', function(this: HTMLElement) {
+          const targetId = this.getAttribute('data-target');
+          const eyeOpen = this.querySelector('.eye-open');
+          const eyeClosed = this.querySelector('.eye-closed');
+          const targetInput = document.getElementById(targetId!) as HTMLInputElement;
+          if (targetInput?.type === 'password') {
+            targetInput.type = 'text';
+            eyeOpen?.classList.add('hidden');
+            eyeClosed?.classList.remove('hidden');
+          } else {
+            targetInput.type = 'password';
+            eyeOpen?.classList.remove('hidden');
+            eyeClosed?.classList.add('hidden');
+          }
+        });
+      });
+    });
+  </script>
+</Layout>

@@ -1,0 +1,153 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SectionContainer from '../../components/SectionContainer.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import { Card, CardContent } from '../../components/ui/card';
+import { Button } from '../../components/ui/button';
+import { Shield, Lock, FileText, Upload, Download, CheckCircle, ArrowRight } from 'lucide-react';
+---
+
+<Layout title="Archivage Sécurisé - PREVICARE EMPLOI">
+  <main class="flex min-h-screen flex-col">
+    <!-- Hero Section -->
+    <section class="relative w-full py-20 md:py-28 overflow-hidden">
+      <!-- Image de fond -->
+      <div
+        class="absolute inset-0 z-0"
+        style="background-image: url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2070&auto=format&fit=crop'); background-size: cover; background-position: center;"
+      >
+        <!-- Overlay pour améliorer la lisibilité -->
+        <div class="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/70"></div>
+      </div>
+
+      <div class="container relative px-4 md:px-6 z-10">
+        <div class="grid gap-12 lg:grid-cols-2 items-center">
+          <div class="space-y-6">
+            <div class="badge badge-primary inline-flex items-center mb-2 bg-white/20 text-white">
+              Service Premium
+            </div>
+            <h1 class="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl text-white">
+              Archivage Sécurisé
+            </h1>
+            <p class="text-xl text-white/90 max-w-[600px]">
+              Conservation chiffrée de vos documents RH importants avec accès permanent et sécurisé, où que vous soyez.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-3 pt-4">
+              <Button
+                size="lg"
+                className="bg-white text-primary hover:bg-white/90 shadow-button-glow btn-glow"
+                asChild
+              >
+                <a href="/inscription">
+                  Commencer maintenant <ArrowRight className="ml-2 h-4 w-4" />
+                </a>
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-white text-white bg-white/20 hover:bg-white/30 transition-colors"
+                asChild
+              >
+                <a href="/contact">Nous contacter</a>
+              </Button>
+            </div>
+          </div>
+          <div class="relative">
+            <div class="absolute -top-6 -left-6 w-24 h-24 bg-white/10 rounded-full animate-pulse-slow"></div>
+            <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-white/10 rounded-full animate-pulse-slow animation-delay-1000"></div>
+
+            <div class="relative rounded-2xl overflow-hidden shadow-card card-3d">
+              <img
+                src="https://images.unsplash.com/photo-1568667256549-094345857637?q=80&w=1000&auto=format&fit=crop"
+                alt="Archivage sécurisé de documents"
+                class="w-full h-auto object-cover aspect-video"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <SectionContainer background="accent">
+      <SectionTitle
+        title="Pourquoi choisir notre service d'archivage ?"
+        badge="Fonctionnalités"
+        badgeVariant="primary"
+        subtitle="Notre solution d'archivage offre de nombreux avantages pour sécuriser vos documents importants."
+      />
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {[
+          {
+            icon: Shield,
+            title: "Sécurité maximale",
+            description:
+              "Chiffrement de bout en bout et authentification à deux facteurs pour protéger vos données sensibles.",
+          },
+          {
+            icon: Lock,
+            title: "Confidentialité garantie",
+            description: "Accès strictement contrôlé à vos documents avec journalisation des consultations.",
+          },
+          {
+            icon: FileText,
+            title: "Organisation intelligente",
+            description: "Classement automatique et recherche avancée pour retrouver rapidement vos documents.",
+          },
+          {
+            icon: Upload,
+            title: "Import simplifié",
+            description: "Téléchargement par lot et reconnaissance automatique du type de document.",
+          },
+          {
+            icon: Download,
+            title: "Accès permanent",
+            description: "Consultez et téléchargez vos documents 24/7 depuis n'importe quel appareil.",
+          },
+          {
+            icon: CheckCircle,
+            title: "Conformité légale",
+            description: "Respect des normes RGPD et de la législation sénégalaise sur la conservation des données.",
+          },
+        ].map((feature) => (
+          <Card
+            className="border-none shadow-card transition-all duration-300 hover:shadow-lg group card-hover"
+            client:load
+          >
+            <CardContent className="p-6 flex flex-col items-center text-center">
+              <div class="p-3 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors mb-4">
+                <div class="group-hover:animate-wave">
+                  <feature.icon className="h-10 w-10 text-primary" />
+                </div>
+              </div>
+              <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">{feature.title}</h3>
+              <p class="text-gray-600">{feature.description}</p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </SectionContainer>
+
+    <!-- CTA Section -->
+    <SectionContainer background="gradient-primary">
+      <div class="flex flex-col items-center justify-center space-y-4 text-center">
+        <h2 class="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-white">
+          Prêt à sécuriser vos documents importants ?
+        </h2>
+        <p class="max-w-[700px] md:text-xl/relaxed text-white">
+          Rejoignez PREVICARE EMPLOI dès aujourd'hui et bénéficiez de notre service d'archivage sécurisé.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 mt-6">
+          <Button size="lg" className="bg-white text-primary hover:bg-white/90 shadow-button-glow btn-glow" asChild>
+            <a href="/inscription">Commencer gratuitement</a>
+          </Button>
+          <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10" asChild>
+            <a href="/contact">Nous contacter</a>
+          </Button>
+        </div>
+      </div>
+    </SectionContainer>
+  </main>
+</Layout>
