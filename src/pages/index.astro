@@ -1,21 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar.astro';
-import SiteFooter from '../components/SiteFooter.astro';
 import HeroSection from '../components/HeroSection.astro';
 import SectionContainer from '../components/SectionContainer.astro';
 import SectionTitle from '../components/SectionTitle.astro';
-import TargetAudience from '../components/TargetAudience.astro';
 import ServiceCard from '../components/ServiceCard.astro';
+import TargetAudience from '../components/TargetAudience.astro';
 import StatCard from '../components/StatCard.astro';
 import TestimonialCard from '../components/TestimonialCard.astro';
+import PartnerLogos from '../components/PartnerLogos.astro';
+import { FileText, Shield, BarChart, Scale, Briefcase, UserCheck, CheckCircle, ArrowRight, TrendingUp } from 'lucide-react';
 ---
 
-<Layout title="PREVICARE EMPLOI - Conciergerie RH en Afrique">
-  <Navbar />
+<Layout title="PREVICARE EMPLOI - La première conciergerie RH en Afrique">
   <main class="flex min-h-screen flex-col items-center bg-accent">
     <!-- Hero Section -->
-    <HeroSection />
+    <HeroSection transition:name="hero" />
 
     <!-- Target Audience Section -->
     <SectionContainer id="solutions" background="accent">
@@ -45,49 +44,38 @@ import TestimonialCard from '../components/TestimonialCard.astro';
 
           <ul class="space-y-3 mt-6">
             <li class="flex items-start group">
-              <svg class="h-5 w-5 text-senegal-green mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
+              <CheckCircle className="h-5 w-5 text-senegal-green mr-3 mt-1 flex-shrink-0" />
               <span class="text-primary/90">Expérience utilisateur fluide, pensée mobile-first</span>
             </li>
             <li class="flex items-start group">
-              <svg class="h-5 w-5 text-senegal-green mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
+              <CheckCircle className="h-5 w-5 text-senegal-green mr-3 mt-1 flex-shrink-0" />
               <span class="text-primary/90">Assistant juridique intelligent (IA) pour les questions courantes</span>
             </li>
             <li class="flex items-start group">
-              <svg class="h-5 w-5 text-senegal-green mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
+              <CheckCircle className="h-5 w-5 text-senegal-green mr-3 mt-1 flex-shrink-0" />
               <span class="text-primary/90">Baromètre du climat social pour les entreprises</span>
             </li>
             <li class="flex items-start group">
-              <svg class="h-5 w-5 text-senegal-green mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
+              <CheckCircle className="h-5 w-5 text-senegal-green mr-3 mt-1 flex-shrink-0" />
               <span class="text-primary/90">Jurithèque complète et mise à jour</span>
             </li>
             <li class="flex items-start group">
-              <svg class="h-5 w-5 text-senegal-green mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
+              <CheckCircle className="h-5 w-5 text-senegal-green mr-3 mt-1 flex-shrink-0" />
               <span class="text-primary/90">Accès aux offres d'emploi pertinentes</span>
             </li>
             <li class="flex items-start group">
-              <svg class="h-5 w-5 text-senegal-green mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
+              <CheckCircle className="h-5 w-5 text-senegal-green mr-3 mt-1 flex-shrink-0" />
               <span class="text-primary/90">Paiements intégrés (Orange Money, Wave, CB)</span>
             </li>
           </ul>
 
           <div class="pt-4">
-            <a href="/a-propos" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary hover:bg-primary-dark shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all duration-300 h-11 rounded-md px-8">
+            <a
+              href="/a-propos"
+              class="inline-flex items-center px-6 py-3 bg-primary hover:bg-primary-dark text-white font-semibold rounded-lg shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all duration-300"
+            >
               Découvrir notre mission
-              <svg class="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-              </svg>
+              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
         </div>
@@ -97,9 +85,7 @@ import TestimonialCard from '../components/TestimonialCard.astro';
             <div class="grid grid-cols-1 gap-6">
               <div class="flex items-center gap-4">
                 <div class="bg-secondary/20 p-3 rounded-full">
-                  <svg class="h-8 w-8 text-secondary-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16l3-1m-3 1l-3-1"></path>
-                  </svg>
+                  <Scale className="h-8 w-8 text-secondary-dark" />
                 </div>
                 <div>
                   <h3 class="font-bold text-primary text-lg">Conformité Juridique</h3>
@@ -110,9 +96,7 @@ import TestimonialCard from '../components/TestimonialCard.astro';
               </div>
               <div class="flex items-center gap-4">
                 <div class="bg-secondary/20 p-3 rounded-full">
-                  <svg class="h-8 w-8 text-secondary-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0H8m8 0v2a2 2 0 01-2 2H10a2 2 0 01-2-2V6"></path>
-                  </svg>
+                  <Briefcase className="h-8 w-8 text-secondary-dark" />
                 </div>
                 <div>
                   <h3 class="font-bold text-primary text-lg">Gestion de Carrière</h3>
@@ -123,9 +107,7 @@ import TestimonialCard from '../components/TestimonialCard.astro';
               </div>
               <div class="flex items-center gap-4">
                 <div class="bg-secondary/20 p-3 rounded-full">
-                  <svg class="h-8 w-8 text-secondary-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                  </svg>
+                  <UserCheck className="h-8 w-8 text-secondary-dark" />
                 </div>
                 <div>
                   <h3 class="font-bold text-primary text-lg">Suivi Social</h3>
@@ -151,28 +133,32 @@ import TestimonialCard from '../components/TestimonialCard.astro';
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <ServiceCard
-          icon="shield"
+          icon={Shield}
           title="Archivage Sécurisé"
           description="Conservation chiffrée de vos documents RH importants avec accès permanent."
+          link="/services/archivage"
           variant="primary"
         />
         <ServiceCard
-          icon="bar-chart"
+          icon={BarChart}
           title="Suivi IPRES"
           description="Monitoring de vos cotisations et alertes en cas d'anomalies détectées."
+          link="/services/ipres"
           variant="secondary"
         />
         <ServiceCard
-          icon="file-text"
+          icon={FileText}
           title="Conseil Juridique"
           description="Assistance personnalisée pour tous vos besoins en droit du travail."
+          link="/services/juridique"
           variant="primary"
         />
         <ServiceCard
-          icon="users"
-          title="Gestion de Carrière"
-          description="Accompagnement professionnel pour votre évolution de carrière."
-          variant="secondary"
+          icon={TrendingUp}
+          title="Gestion de carrière"
+          description="Accompagnement pour votre évolution professionnelle."
+          link="/services/carriere"
+          variant="highlight"
         />
       </div>
     </SectionContainer>
@@ -181,26 +167,26 @@ import TestimonialCard from '../components/TestimonialCard.astro';
     <SectionContainer background="white">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
         <StatCard
-          value="5,000+"
+          number="5,000+"
           label="Utilisateurs actifs"
           description="Professionnels qui nous font confiance"
           trend="up"
         />
         <StatCard
-          value="98%"
+          number="98%"
           label="Taux de satisfaction"
           description="Clients satisfaits de nos services"
           trend="up"
         />
-        <StatCard 
-          value="24/7" 
-          label="Support client" 
-          description="Assistance disponible à tout moment" 
+        <StatCard
+          number="24/7"
+          label="Support client"
+          description="Assistance disponible à tout moment"
         />
-        <StatCard 
-          value="100%" 
-          label="Sécurité des données" 
-          description="Protection maximale de vos informations" 
+        <StatCard
+          number="100%"
+          label="Sécurité des données"
+          description="Protection maximale de vos informations"
         />
       </div>
     </SectionContainer>
@@ -216,22 +202,25 @@ import TestimonialCard from '../components/TestimonialCard.astro';
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <TestimonialCard
-          image="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=300&auto=format&fit=crop"
-          name="Thomas K."
-          role="Employé"
           quote="Grâce à PREVICARE EMPLOI, je peux suivre mes cotisations IPRES et archiver tous mes documents importants en toute sécurité."
+          author="Thomas K."
+          company="Employé"
+          rating={5}
+          image="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=300&auto=format&fit=crop"
         />
         <TestimonialCard
-          image="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=300&auto=format&fit=crop"
-          name="Agathe M."
-          role="Responsable RH"
           quote="La plateforme nous a permis de simplifier considérablement notre gestion administrative et d'améliorer notre conformité légale."
+          author="Agathe M."
+          company="Responsable RH"
+          rating={5}
+          image="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=300&auto=format&fit=crop"
         />
         <TestimonialCard
-          image="https://images.unsplash.com/photo-1566492031773-4f4e44671857?q=80&w=300&auto=format&fit=crop"
-          name="Aurélien D."
-          role="Expatrié"
           quote="Un outil indispensable pour gérer mes contrats et mes droits en tant qu'expatrié au Sénégal."
+          author="Aurélien D."
+          company="Expatrié"
+          rating={5}
+          image="https://images.unsplash.com/photo-1566492031773-4f4e44671857?q=80&w=300&auto=format&fit=crop"
         />
       </div>
     </SectionContainer>
@@ -244,33 +233,35 @@ import TestimonialCard from '../components/TestimonialCard.astro';
         badgeVariant="secondary"
         subtitle="PREVICARE EMPLOI collabore avec des institutions reconnues pour vous offrir le meilleur service."
       />
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center opacity-60">
-        <img src="/placeholder-logo.png" alt="Partenaire 1" class="h-12 w-auto grayscale hover:grayscale-0 transition-all" />
-        <img src="/placeholder-logo.png" alt="Partenaire 2" class="h-12 w-auto grayscale hover:grayscale-0 transition-all" />
-        <img src="/placeholder-logo.png" alt="Partenaire 3" class="h-12 w-auto grayscale hover:grayscale-0 transition-all" />
-        <img src="/placeholder-logo.png" alt="Partenaire 4" class="h-12 w-auto grayscale hover:grayscale-0 transition-all" />
-      </div>
+      <PartnerLogos />
     </SectionContainer>
 
-    <!-- CTA Section -->
-    <SectionContainer background="gradient-primary" className="rounded-none text-primary-foreground">
-      <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-          Prêt à simplifier votre gestion RH ?
-        </h2>
-        <p class="mt-4 max-w-[700px] mx-auto md:text-xl/relaxed">
-          Rejoignez PREVICARE EMPLOI dès aujourd'hui et bénéficiez d'un accompagnement personnalisé.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 mt-8 justify-center">
-          <a href="/inscription" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary-dark shadow-lg shadow-secondary/30 h-11 rounded-md px-8">
-            S'inscrire maintenant
-          </a>
-          <a href="/contact" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border-white text-white hover:bg-white/10 bg-transparent h-11 rounded-md px-8">
-            Nous contacter
-          </a>
+    <!-- CTA Section - Call to Action (version PREVICARE différente de V1) -->
+    <section class="bg-gradient-primary py-16 md:py-20 w-full">
+      <div class="container mx-auto px-4 md:px-6 text-center">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+            Prêt à simplifier votre gestion RH ?
+          </h2>
+          <p class="text-lg md:text-xl text-white/90 mb-8 max-w-3xl mx-auto">
+            Rejoignez PREVICARE EMPLOI dès aujourd'hui et bénéficiez d'un accompagnement personnalisé.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="/inscription"
+              class="btn-cta-primary inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-lg transition-all duration-300 hover:scale-105"
+            >
+              S'inscrire maintenant
+            </a>
+            <a
+              href="/contact"
+              class="btn-cta-secondary inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-lg transition-all duration-300 hover:scale-105"
+            >
+              Nous contacter
+            </a>
+          </div>
         </div>
       </div>
-    </SectionContainer>
+    </section>
   </main>
-  <SiteFooter />
 </Layout>

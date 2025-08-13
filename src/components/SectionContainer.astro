@@ -3,7 +3,7 @@ import DecorativeShapes from "./DecorativeShapes.astro";
 import { cn } from "../lib/utils";
 
 interface Props {
-  background?: "white" | "accent" | "pattern" | "gradient-primary";
+  background?: "white" | "accent" | "gradient-primary" | "pattern" | "gradient-secondary" | "gradient-tertiary" | "gradient" | "gradient-to-r from-highlight to-highlight-dark";
   decorative?: boolean;
   decorativeVariant?: "primary" | "secondary" | "mixed";
   className?: string;
@@ -23,6 +23,10 @@ const backgroundClasses = {
   accent: "bg-accent",
   pattern: "bg-gradient-to-br from-accent to-white",
   "gradient-primary": "bg-gradient-primary",
+  "gradient-secondary": "bg-gradient-secondary",
+  "gradient-tertiary": "bg-gradient-tertiary",
+  gradient: "bg-gradient-primary",
+  "gradient-to-r from-highlight to-highlight-dark": "bg-gradient-to-r from-highlight to-highlight-dark",
 };
 ---
 

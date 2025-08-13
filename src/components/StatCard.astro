@@ -1,19 +1,19 @@
 ---
 export interface Props {
-  value: string;
+  number: string;
   label: string;
   description: string;
   trend?: "up" | "down";
 }
 
-const { value, label, description, trend } = Astro.props;
+const { number, label, description, trend } = Astro.props;
 ---
 
 <div class="border-none shadow-soft hover:shadow-card transition-all duration-300 group bg-white rounded-lg">
   <div class="pt-6 text-center p-6">
     <div class="flex items-center justify-center mb-2">
       <span class="text-2xl md:text-3xl font-bold text-primary group-hover:text-secondary transition-colors">
-        {value}
+        {number}
       </span>
       {trend && (
         <div class="ml-2">

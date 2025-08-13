@@ -45,9 +45,9 @@ const currentShapes = shapes[variant] || shapes.primary;
 ---
 
 <div class="absolute inset-0 overflow-hidden pointer-events-none">
-  {currentShapes.map((shape, index) => (
+  {currentShapes.map((shape) => (
     <div
-      key={index}
+      
       class={`absolute rounded-full ${shape.size} ${shape.color} ${shape.position} ${shape.animation}`}
     />
   ))}

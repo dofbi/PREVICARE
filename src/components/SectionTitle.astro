@@ -5,7 +5,7 @@ interface Props {
   title: string;
   subtitle?: string;
   badge?: string;
-  badgeVariant?: "primary" | "secondary";
+  badgeVariant?: "primary" | "secondary" | "tertiary" | "highlight";
   align?: "left" | "center";
 }
 
@@ -20,6 +20,8 @@ const {
 const badgeClasses = {
   primary: "bg-primary/10 text-primary",
   secondary: "bg-secondary/10 text-secondary-dark",
+  tertiary: "bg-tertiary/10 text-tertiary-dark",
+  highlight: "bg-highlight/10 text-highlight-dark",
 };
 
 const alignClasses = {
