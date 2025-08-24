@@ -1,10 +1,12 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
-import vercel from '@astrojs/vercel';
 import { env } from 'process';
+
+import netlify from '@astrojs/netlify';
 
 export default defineConfig({
   integrations: [react()],
+
   // experimental: {
   //   csp: true
   // },
@@ -18,6 +20,7 @@ export default defineConfig({
       port: 4321,
     },
   },
+
   output: 'server',
-  adapter: vercel(),
+  adapter: netlify(),
 });
