@@ -1,6 +1,7 @@
-
-import { auth } from "./auth/index";
+import { auth } from './auth';
+import { profile } from './profile';
 
 export const server = {
   auth,
+  profile,
 };

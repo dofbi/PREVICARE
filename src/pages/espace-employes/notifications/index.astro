@@ -1,0 +1,50 @@
+
+---
+import Layout from '../../../layouts/Layout.astro';
+import DashboardShell from '../../../components/DashboardShell.astro';
+import { NotificationCenter } from '../../../components/employee/NotificationCenter.tsx';
+
+const { user } = Astro.locals;
+
+if (!user) {
+  return Astro.redirect('/connexion');
+}
+---
+
+<Layout title="Centre de Notifications - PREVICARE EMPLOI">
+  <DashboardShell title="Notifications">
+    
+    <!-- Breadcrumbs -->
+    <nav class="flex mb-6" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-4">
+        <li><a href="/espace-employes" class="text-gray-400 hover:text-gray-500">Tableau de bord</a></li>
+        <li><span class="text-gray-300">/</span></li>
+        <li><span class="text-gray-500">Notifications</span></li>
+      </ol>
+    </nav>
+
+    <!-- En-tête avec actions -->
+    <div class="bg-white rounded-lg shadow mb-6">
+      <div class="px-6 py-4 border-b border-gray-200">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-lg font-medium text-gray-900">Centre de notifications</h3>
+            <p class="text-sm text-gray-500">Restez informé des mises à jour importantes</p>
+          </div>
+          <div class="flex space-x-3">
+            <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-md text-sm font-medium">
+              Marquer tout comme lu
+            </button>
+            <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+              Paramètres notifications
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Centre de notifications -->
+    <NotificationCenter client:load />
+
+  </DashboardShell>
+</Layout>
