@@ -1,4 +1,4 @@
-export type = TicketCategory = 'juridique' | 'contrat' | 'paie' | 'general';
+export type TicketCategory = 'juridique' | 'contrat' | 'paie' | 'general';
 export type TicketPriority = 'low' | 'normal' | 'high' | 'urgent';
 export type TicketStatus = 'open' | 'in_progress' | 'resolved' | 'closed';
 
