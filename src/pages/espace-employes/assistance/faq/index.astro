@@ -101,7 +101,7 @@ const groupedFaqs = Object.entries(categories).reduce((acc, [key, category]) => 
         };
 
         return (
-          <section key={key} id={`category-${key}`} class="scroll-mt-20">
+          <section data-key={key} id={`category-${key}`} class="scroll-mt-20">
             <!-- En-tête de catégorie -->
             <div class={`border-l-4 border-l-${category.color}-500 pl-4 mb-4`}>
               <h2 class="text-2xl font-bold text-gray-900 flex items-center gap-2">
@@ -115,7 +115,7 @@ const groupedFaqs = Object.entries(categories).reduce((acc, [key, category]) => 
             <div class="space-y-3 mb-8">
               {category.items.map((faq: any) => (
                 <details
-                  class={`group border-2 rounded-lg overflow-hidden transition-all hover:shadow-md ${colorClasses[category.color]}`}
+                  class={`group border-2 rounded-lg overflow-hidden transition-all hover:shadow-md ${colorClasses[category.color as keyof typeof colorClasses]}`}
                 >
                   <summary class="flex items-center justify-between p-4 cursor-pointer select-none">
                     <div class="flex items-center gap-3 flex-1">

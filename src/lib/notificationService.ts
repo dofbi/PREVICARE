@@ -4,7 +4,7 @@ export interface Notification {
   type: 'info' | 'warning' | 'success' | 'error' | 'urgent';
   priority: 'low' | 'medium' | 'high';
   // category: 'ipres' | 'documents' | 'carriere' | 'juridique' | 'formation' | 'system' | 'assistance';
-  category: 'documents' | 'juridique' | 'formation' | 'system' | 'assistance';
+  category: 'ipres' | 'documents' | 'carriere' | 'juridique' | 'formation' | 'system' | 'assistance';
   title: string;
   message: string;
   date: string;

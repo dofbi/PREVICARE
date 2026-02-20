@@ -116,7 +116,7 @@ const unreadCount = notificationService.getUnreadCount();
             </div>
           ) : (
             recentNotifications.map((notification) => (
-              <div key={notification.id} class="px-6 py-4 hover:bg-gray-50 transition-colors">
+              <div data-key={notification.id} class="px-6 py-4 hover:bg-gray-50 transition-colors">
                 <div class="flex items-start space-x-3">
                   {notification.type === 'urgent' ? (
                     <svg class="h-5 w-5 text-red-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
