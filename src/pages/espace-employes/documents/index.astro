@@ -1,0 +1,180 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import DashboardShell from '../../../components/DashboardShell.astro';
+import DocumentsManager from '../../../components/DocumentsManager';
+import { createClient } from '../../../lib/supabase';
+
+const { user } = Astro.locals;
+
+// Vérifier si l'utilisateur est connecté
+if (!user) {
+  return Astro.redirect('/connexion');
+}
+
+// Créer le client Supabase
+const supabase = createClient({
+  request: Astro.request,
+  cookies: Astro.cookies,
+});
+
+// Récupérer les documents de l'utilisateur
+const { data: documentsData, error: documentsError } = await supabase
+  .from('user_documents')
+  .select('*')
+  .eq('owner_id', user.id)
+  .order('uploaded_at', { ascending: false });
+
+const documents = documentsData || [];
+
+// Calculer les statistiques
+const now = new Date();
+const thirtyDaysFromNow = new Date();
+thirtyDaysFromNow.setDate(now.getDate() + 30);
+
+let validDocuments = 0;
+let expiredDocuments = 0;
+let toRenewDocuments = 0;
+let totalSize = 0;
+
+documents.forEach((doc) => {
+  // Calculer la taille totale (stockée dans metadata.size)
+  totalSize += doc.metadata?.size || 0;
+  
+  // Vérifier la date d'expiration (stockée dans metadata.expiry_date)
+  if (doc.metadata?.expiry_date) {
+    const expirationDate = new Date(doc.metadata.expiry_date);
+    
+    if (expirationDate > now) {
+      // Document pas encore expiré
+      validDocuments++;
+      
+      // Vérifier si expire dans les 30 prochains jours
+      if (expirationDate <= thirtyDaysFromNow) {
+        toRenewDocuments++;
+      }
+    } else {
+      // Document expiré
+      expiredDocuments++;
+    }
+  }
+  // Si pas de date d'expiration, on ne compte pas comme valide/expiré
+});
+
+const stats = {
+  totalDocuments: documents.length,
+  validDocuments,
+  expiredDocuments,
+  toRenewDocuments,
+  documentsWithoutExpiry: documents.length - validDocuments - expiredDocuments,
+  totalSize,
+};
+
+const formatFileSize = (bytes: number): string => {
+  if (bytes === 0) return '0 Bytes';
+  const k = 1024;
+  const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + ' ' + sizes[i];
+};
+---
+
+<Layout title="Documents - PREVICARE EMPLOI">
+  <DashboardShell title="Gestion des documents">
+    
+    <!-- Breadcrumbs -->
+    <nav class="flex mb-4" aria-label="Breadcrumb">
+      <ol class="inline-flex items-center space-x-1 md:space-x-3">
+        <li class="inline-flex items-center">
+          <a href="/espace-employes" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-primary">
+            <svg class="w-3 h-3 mr-2.5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
+            </svg>
+            Tableau de bord
+          </a>
+        </li>
+        <li>
+          <div class="flex items-center">
+            <svg class="w-3 h-3 text-gray-400 mx-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+            <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2">Documents</span>
+          </div>
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Header avec stats -->
+    <div class="grid gap-4 md:grid-cols-4 mb-6">
+      <div class="bg-white rounded-lg border shadow-sm p-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm font-medium text-gray-600">Total documents</p>
+            <p class="text-2xl font-bold text-gray-900">{stats.totalDocuments}</p>
+          </div>
+          <div class="h-8 w-8 bg-blue-100 rounded-md flex items-center justify-center">
+            <svg class="h-4 w-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg border shadow-sm p-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm font-medium text-gray-600">Valides</p>
+            <p class="text-2xl font-bold text-green-600">{stats.validDocuments}</p>
+            <p class="text-xs text-gray-500 mt-1">Non expirés avec date</p>
+          </div>
+          <div class="h-8 w-8 bg-green-100 rounded-md flex items-center justify-center">
+            <svg class="h-4 w-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg border shadow-sm p-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm font-medium text-gray-600">À renouveler</p>
+            <p class="text-2xl font-bold text-orange-600">{stats.toRenewDocuments}</p>
+            <p class="text-xs text-gray-500 mt-1">Expire sous 30 jours</p>
+          </div>
+          <div class="h-8 w-8 bg-orange-100 rounded-md flex items-center justify-center">
+            <svg class="h-4 w-4 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg border shadow-sm p-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm font-medium text-gray-600">Taille totale</p>
+            <p class="text-2xl font-bold text-gray-900">{formatFileSize(stats.totalSize)}</p>
+          </div>
+          <div class="h-8 w-8 bg-purple-100 rounded-md flex items-center justify-center">
+            <svg class="h-4 w-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section principale -->
+    <div class="bg-white rounded-lg border shadow-sm">
+      <div class="p-6 border-b">
+        <h3 class="text-lg font-semibold">Mes documents</h3>
+        <p class="text-sm text-gray-600">Gérez et organisez vos documents RH en toute sécurité</p>
+      </div>
+      
+      <div class="p-6">
+        <DocumentsManager client:load initialDocuments={documents} />
+      </div>
+    </div>
+
+  </DashboardShell>
+</Layout>

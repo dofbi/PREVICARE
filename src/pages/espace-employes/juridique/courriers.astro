@@ -1,0 +1,269 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import DashboardShell from '../../../components/DashboardShell.astro';
+import { AssistanceChat } from '../../../components/employee/AssistanceChat.tsx';
+
+const { user } = Astro.locals;
+
+if (!user) {
+  return Astro.redirect('/connexion');
+}
+
+const juridicalQuestions = [
+  "Comment contester une sanction disciplinaire ?",
+  "Quels droits ai-je en cas de harcèlement au travail ?",
+  "Comment demander des congés officiellement ?",
+  "Que faire en cas de non-paiement de salaire ?",
+  "Quels sont mes droits en cas de licenciement ?"
+];
+
+const initialJuridicalMessage = "Bonjour ! Je suis votre assistant juridique PREVICARE. Je peux vous aider à rédiger des courriers professionnels adaptés à votre situation et vous conseiller sur vos droits au travail. Quelle est votre situation ?";
+---
+
+<Layout title="Aide à la Rédaction - PREVICARE EMPLOI">
+  <DashboardShell title="Aide à la Rédaction">
+
+    <!-- Breadcrumbs -->
+    <nav class="flex mb-6" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-4">
+        <li><a href="/espace-employes" class="text-gray-400 hover:text-gray-500">Tableau de bord</a></li>
+        <li><span class="text-gray-300">/</span></li>
+        <li><a href="/espace-employes/juridique" class="text-gray-400 hover:text-gray-500">Juridique</a></li>
+        <li><span class="text-gray-300">/</span></li>
+        <li><span class="text-gray-500">Courriers</span></li>
+      </ol>
+    </nav>
+
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="text-2xl font-bold text-gray-900">Aide à la Rédaction de Courriers</h1>
+      <p class="text-gray-600 mt-2">Générez des courriers professionnels adaptés à votre situation</p>
+    </div>
+
+    <!-- Types de courriers -->
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-8">
+      <!-- Contestation de sanction -->
+      <div class="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow cursor-pointer">
+        <div class="flex items-center mb-4">
+          <div class="flex-shrink-0">
+            <svg class="h-8 w-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.664-.833-2.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <h3 class="text-lg font-medium text-gray-900">Contestation de sanction</h3>
+            <p class="text-sm text-gray-500">Avertissement, blâme, mise à pied</p>
+          </div>
+        </div>
+        <p class="text-gray-600 text-sm mb-4">Rédigez un courrier pour contester une sanction disciplinaire injustifiée.</p>
+        <button class="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700">
+          Générer le courrier
+        </button>
+      </div>
+
+      <!-- Demande d'explication -->
+      <div class="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow cursor-pointer">
+        <div class="flex items-center mb-4">
+          <div class="flex-shrink-0">
+            <svg class="h-8 w-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <h3 class="text-lg font-medium text-gray-900">Demande d'explication</h3>
+            <p class="text-sm text-gray-500">Clarification de décision</p>
+          </div>
+        </div>
+        <p class="text-gray-600 text-sm mb-4">Demandez des clarifications sur une décision de votre employeur.</p>
+        <button class="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+          Générer le courrier
+        </button>
+      </div>
+
+      <!-- Réclamation salariale -->
+      <div class="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow cursor-pointer">
+        <div class="flex items-center mb-4">
+          <div class="flex-shrink-0">
+            <svg class="h-8 w-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <h3 class="text-lg font-medium text-gray-900">Réclamation salariale</h3>
+            <p class="text-sm text-gray-500">Heures supplémentaires, primes</p>
+          </div>
+        </div>
+        <p class="text-gray-600 text-sm mb-4">Réclamez des éléments de salaire non payés ou mal calculés.</p>
+        <button class="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
+          Générer le courrier
+        </button>
+      </div>
+
+      <!-- Demande de congés -->
+      <div class="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow cursor-pointer">
+        <div class="flex items-center mb-4">
+          <div class="flex-shrink-0">
+            <svg class="h-8 w-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 4v10a1 1 0 001 1h4a1 1 0 001-1V11M7 7h10"></path>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <h3 class="text-lg font-medium text-gray-900">Demande de congés</h3>
+            <p class="text-sm text-gray-500">Congés payés, sans solde</p>
+          </div>
+        </div>
+        <p class="text-gray-600 text-sm mb-4">Formulez une demande officielle de congés selon la réglementation.</p>
+        <button class="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700">
+          Générer le courrier
+        </button>
+      </div>
+
+      <!-- Signalement de harcèlement -->
+      <div class="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow cursor-pointer">
+        <div class="flex items-center mb-4">
+          <div class="flex-shrink-0">
+            <svg class="h-8 w-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.664-.833-2.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <h3 class="text-lg font-medium text-gray-900">Signalement harcèlement</h3>
+            <p class="text-sm text-gray-500">Moral, sexuel, discrimination</p>
+          </div>
+        </div>
+        <p class="text-gray-600 text-sm mb-4">Signalez une situation de harcèlement à votre hiérarchie ou aux autorités.</p>
+        <button class="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700">
+          Générer le courrier
+        </button>
+      </div>
+
+      <!-- Courrier personnalisé -->
+      <div class="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow cursor-pointer">
+        <div class="flex items-center mb-4">
+          <div class="flex-shrink-0">
+            <svg class="h-8 w-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <h3 class="text-lg font-medium text-gray-900">Courrier personnalisé</h3>
+            <p class="text-sm text-gray-500">Autre situation</p>
+          </div>
+        </div>
+        <p class="text-gray-600 text-sm mb-4">Obtenez de l'aide pour rédiger un courrier adapté à votre situation spécifique.</p>
+        <button class="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700">
+          Demander de l'aide
+        </button>
+      </div>
+    </div>
+
+    <!-- Assistant Chat pour aide à la rédaction -->
+    <div class="grid gap-6 lg:grid-cols-3 mb-8">
+      <div class="lg:col-span-2">
+        <div class="bg-white rounded-lg shadow">
+          <div class="px-6 py-4 border-b border-gray-200">
+            <h3 class="text-lg font-medium text-gray-900">💬 Assistant de rédaction</h3>
+            <p class="text-sm text-gray-500">Posez vos questions pour obtenir de l'aide sur vos courriers et vos droits</p>
+          </div>
+          <div class="p-6">
+            <AssistanceChat 
+              variant="full" 
+              predefinedQuestions={juridicalQuestions}
+              initialMessage={initialJuridicalMessage}
+              context="juridique"
+              client:load 
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Guide rapide pour démarrer -->
+      <div class="bg-blue-50 rounded-lg shadow p-6 border-l-4 border-blue-600">
+        <h3 class="text-lg font-medium text-gray-900 mb-4">🎯 Bien démarrer</h3>
+        <div class="space-y-3">
+          <div>
+            <h4 class="font-medium text-gray-900 text-sm">1. Décrivez votre situation</h4>
+            <p class="text-xs text-gray-600 mt-1">Expliquez brièvement votre problème ou la raison du courrier</p>
+          </div>
+          <div>
+            <h4 class="font-medium text-gray-900 text-sm">2. Posez vos questions</h4>
+            <p class="text-xs text-gray-600 mt-1">L'assistant répondra et vous proposera une aide adaptée</p>
+          </div>
+          <div>
+            <h4 class="font-medium text-gray-900 text-sm">3. Personnalisez le courrier</h4>
+            <p class="text-xs text-gray-600 mt-1">Adaptez le texte généré à votre contexte précis</p>
+          </div>
+          <div>
+            <h4 class="font-medium text-gray-900 text-sm">4. Téléchargez et envoyez</h4>
+            <p class="text-xs text-gray-600 mt-1">Récupérez le courrier finalisé et transmettez-le</p>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-blue-200">
+          <p class="text-xs text-gray-600 mb-3">💡 <strong>Conseil :</strong> Soyez précis et détaillé pour obtenir une aide optimale</p>
+          <a href="/espace-employes/assistance/faq#category-juridique" class="inline-flex items-center text-sm text-blue-600 hover:text-blue-700 font-medium">
+            Voir la FAQ juridique →
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mes courriers récents -->
+    <div class="bg-white rounded-lg shadow">
+      <div class="px-6 py-4 border-b border-gray-200">
+        <h3 class="text-lg font-medium text-gray-900">Mes courriers récents</h3>
+        <p class="text-sm text-gray-500">Historique de vos courriers générés</p>
+      </div>
+      <div class="px-6 py-6">
+        <div class="space-y-4">
+          <!-- Courrier 1 -->
+          <div class="flex items-center justify-between p-4 border rounded-lg">
+            <div class="flex items-center space-x-4">
+              <div class="flex-shrink-0">
+                <svg class="h-8 w-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.664-.833-2.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="text-lg font-medium text-gray-900">Contestation d'avertissement</h4>
+                <p class="text-sm text-gray-500">Généré le 15 mars 2025</p>
+              </div>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                Envoyé
+              </span>
+              <button class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                Télécharger
+              </button>
+            </div>
+          </div>
+
+          <!-- Courrier 2 -->
+          <div class="flex items-center justify-between p-4 border rounded-lg">
+            <div class="flex items-center space-x-4">
+              <div class="flex-shrink-0">
+                <svg class="h-8 w-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="text-lg font-medium text-gray-900">Réclamation heures supplémentaires</h4>
+                <p class="text-sm text-gray-500">Généré le 10 mars 2025</p>
+              </div>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                En attente
+              </span>
+              <button class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                Télécharger
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </DashboardShell>
+</Layout>

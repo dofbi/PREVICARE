@@ -1,0 +1,273 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionContainer from '../components/SectionContainer.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+
+const { user } = Astro.locals;
+const isLoggedIn = !!user;
+---
+
+<Layout title="Delegues du Personnel - PREVICARE">
+  <main class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
+    <!-- Hero Section -->
+    <section class="relative py-20 px-4 text-center bg-gradient-to-r from-primary to-primary-dark text-white">
+      <div class="absolute inset-0 bg-black/10"></div>
+      <div class="relative max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+          Accompagnement des Delegues du Personnel
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 text-blue-100">
+          Outils et expertise pour renforcer la qualite du dialogue social, la negociation collective et la defense des droits des salaries.
+        </p>
+        <a
+          href="#outils"
+          class="inline-flex items-center px-8 py-4 bg-white text-primary font-semibold rounded-lg hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+        >
+          Decouvrir notre offre
+          <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- Section Outils digitaux -->
+    <SectionContainer id="outils">
+      <SectionTitle
+        title="Outils digitaux"
+        badge="4 outils"
+        badgeVariant="primary"
+        subtitle="Des outils numeriques pour renforcer votre efficacite en tant que representant du personnel."
+      />
+      <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div class="bg-white rounded-xl shadow-md p-8 border-l-4 border-l-primary hover:shadow-lg transition-shadow">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mr-4">
+              <svg class="h-6 w-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900">Consultant RH digital "SETLOU"</h3>
+          </div>
+          <div class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mb-3">5 000 000 tokens/utilisateur</div>
+          <ul class="text-gray-600 space-y-2 text-sm">
+            <li class="flex items-start"><span class="text-primary mr-2 mt-0.5">&#8226;</span>Reponses rapides aux questions de droit social et de mandat</li>
+            <li class="flex items-start"><span class="text-primary mr-2 mt-0.5">&#8226;</span>Renforce la qualite du dialogue social</li>
+          </ul>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md p-8 border-l-4 border-l-primary hover:shadow-lg transition-shadow">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mr-4">
+              <svg class="h-6 w-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900">Archivage numerique securise</h3>
+          </div>
+          <ul class="text-gray-600 space-y-2 text-sm">
+            <li class="flex items-start"><span class="text-primary mr-2 mt-0.5">&#8226;</span>PV de reunion, courriers, accords d'entreprises, conventions d'etablissement</li>
+            <li class="flex items-start"><span class="text-primary mr-2 mt-0.5">&#8226;</span>Conserve un historique probant</li>
+            <li class="flex items-start"><span class="text-primary mr-2 mt-0.5">&#8226;</span>Securise le suivi des engagements et prepare les echanges</li>
+          </ul>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md p-8 border-l-4 border-l-primary hover:shadow-lg transition-shadow">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mr-4">
+              <svg class="h-6 w-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900">Visionneuse Juritheque</h3>
+          </div>
+          <ul class="text-gray-600 space-y-2 text-sm">
+            <li class="flex items-start"><span class="text-primary mr-2 mt-0.5">&#8226;</span>Acces rapide aux references juridiques</li>
+            <li class="flex items-start"><span class="text-primary mr-2 mt-0.5">&#8226;</span>Base documentaire fiable pour lever l'incertitude</li>
+          </ul>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md p-8 border-l-4 border-l-primary hover:shadow-lg transition-shadow">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mr-4">
+              <svg class="h-6 w-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900">Assistant redactionnel "Xalima"</h3>
+          </div>
+          <div class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mb-3">3 000 000 tokens/utilisateur/mois</div>
+          <ul class="text-gray-600 space-y-2 text-sm">
+            <li class="flex items-start"><span class="text-primary mr-2 mt-0.5">&#8226;</span>Accelere la production de documents (notes, courriers, clauses)</li>
+            <li class="flex items-start"><span class="text-primary mr-2 mt-0.5">&#8226;</span>Limite les incoherences de redaction</li>
+          </ul>
+        </div>
+      </div>
+    </SectionContainer>
+
+    <!-- Section Services -->
+    <SectionContainer background="accent">
+      <SectionTitle
+        title="Services"
+        badge="6 services"
+        badgeVariant="tertiary"
+        subtitle="Un accompagnement expert pour le dialogue social et la defense des droits des salaries."
+      />
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-l-tertiary hover:shadow-lg transition-shadow">
+          <h3 class="text-base font-bold text-gray-900 mb-3">Negociation sociale et accords collectifs</h3>
+          <ul class="text-gray-600 space-y-1.5 text-sm">
+            <li class="flex items-start"><span class="text-tertiary mr-2 mt-0.5">&#8226;</span>Renforce la strategie de negociation</li>
+            <li class="flex items-start"><span class="text-tertiary mr-2 mt-0.5">&#8226;</span>Obtention d'accords plus solides et juridiquement securises</li>
+          </ul>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-l-tertiary hover:shadow-lg transition-shadow">
+          <h3 class="text-base font-bold text-gray-900 mb-3">Conflit social</h3>
+          <ul class="text-gray-600 space-y-1.5 text-sm">
+            <li class="flex items-start"><span class="text-tertiary mr-2 mt-0.5">&#8226;</span>Aide a cadrer l'action collective</li>
+            <li class="flex items-start"><span class="text-tertiary mr-2 mt-0.5">&#8226;</span>Favorise une sortie de crise maitrisee</li>
+          </ul>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-l-tertiary hover:shadow-lg transition-shadow">
+          <h3 class="text-base font-bold text-gray-900 mb-3">Audit social et benchmark sectoriel</h3>
+          <ul class="text-gray-600 space-y-1.5 text-sm">
+            <li class="flex items-start"><span class="text-tertiary mr-2 mt-0.5">&#8226;</span>Fournit des reperes comparatifs</li>
+            <li class="flex items-start"><span class="text-tertiary mr-2 mt-0.5">&#8226;</span>Objectivise les demandes et appuie le dialogue social</li>
+          </ul>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-l-tertiary hover:shadow-lg transition-shadow">
+          <h3 class="text-base font-bold text-gray-900 mb-3">Redaction et validation des accords sociaux</h3>
+          <ul class="text-gray-600 space-y-1.5 text-sm">
+            <li class="flex items-start"><span class="text-tertiary mr-2 mt-0.5">&#8226;</span>Accords d'etablissements et d'entreprises</li>
+            <li class="flex items-start"><span class="text-tertiary mr-2 mt-0.5">&#8226;</span>Securise la redaction (clarte, coherence, conformite)</li>
+            <li class="flex items-start"><span class="text-tertiary mr-2 mt-0.5">&#8226;</span>Limite les risques de contestation</li>
+          </ul>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-l-tertiary hover:shadow-lg transition-shadow">
+          <h3 class="text-base font-bold text-gray-900 mb-3">Formation gestion des conflits</h3>
+          <ul class="text-gray-600 space-y-1.5 text-sm">
+            <li class="flex items-start"><span class="text-tertiary mr-2 mt-0.5">&#8226;</span>Renforce les competences pratiques</li>
+            <li class="flex items-start"><span class="text-tertiary mr-2 mt-0.5">&#8226;</span>Gestion des situations sensibles avec methode et efficacite</li>
+          </ul>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-l-tertiary hover:shadow-lg transition-shadow">
+          <h3 class="text-base font-bold text-gray-900 mb-3">Veille juridique mensuelle</h3>
+          <ul class="text-gray-600 space-y-1.5 text-sm">
+            <li class="flex items-start"><span class="text-tertiary mr-2 mt-0.5">&#8226;</span>Information sur les evolutions utiles au mandat</li>
+            <li class="flex items-start"><span class="text-tertiary mr-2 mt-0.5">&#8226;</span>Agir a temps et eviter les omissions</li>
+          </ul>
+        </div>
+      </div>
+    </SectionContainer>
+
+    <!-- Section Tarification -->
+    <SectionContainer>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-gradient-to-br from-primary/5 to-tertiary/5 rounded-2xl p-12 border border-primary/10 text-center">
+          <h2 class="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Offre Delegues</h2>
+          <div class="text-5xl font-extrabold text-gray-900 mb-2">600 000 FCFA</div>
+          <p class="text-xl text-gray-500 mb-4">par trimestre</p>
+          <p class="text-sm text-gray-600 mb-8">
+            Inclut tous les outils et services listes ci-dessus.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href={isLoggedIn ? '/contact' : '/inscription?redirect=/espace-delegues'}
+              class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-primary to-primary-dark text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+            >
+              Souscrire a l'offre delegues
+            </a>
+            <a
+              href="/contact"
+              class="inline-flex items-center justify-center px-8 py-4 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
+            >
+              Nous contacter
+            </a>
+          </div>
+        </div>
+      </div>
+    </SectionContainer>
+
+    <!-- Section Avantages -->
+    <SectionContainer background="accent">
+      <div class="bg-gradient-to-r from-primary/5 to-tertiary/5 rounded-2xl p-8">
+        <h2 class="text-3xl font-bold text-center mb-8 text-gray-900">
+          Pourquoi nous choisir ?
+        </h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="space-y-6">
+            <div class="flex items-start">
+              <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                <svg class="h-4 w-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold text-gray-900 mb-2">Expertise Reconnue</h4>
+                <p class="text-gray-600">Plus de 15 ans d'experience dans l'accompagnement des delegues.</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <div class="w-8 h-8 bg-secondary rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                <svg class="h-4 w-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold text-gray-900 mb-2">Disponibilite</h4>
+                <p class="text-gray-600">Support et conseil disponibles pour les urgences.</p>
+              </div>
+            </div>
+          </div>
+          <div class="space-y-6">
+            <div class="flex items-start">
+              <div class="w-8 h-8 bg-tertiary rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                <svg class="h-4 w-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold text-gray-900 mb-2">Transparence</h4>
+                <p class="text-gray-600">Tarif clair sans frais caches.</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                <svg class="h-4 w-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold text-gray-900 mb-2">Reseau National</h4>
+                <p class="text-gray-600">Presence sur tout le territoire senegalais.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </SectionContainer>
+
+    <!-- CTA final -->
+    <SectionContainer>
+      <div class="text-center">
+        <h3 class="text-2xl font-bold text-gray-900 mb-4">
+          Pret a renforcer votre mandat ?
+        </h3>
+        <p class="text-lg text-gray-600 mb-8">
+          Beneficiez de l'expertise PREVICARE pour mieux representer les salaries.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href={isLoggedIn ? '/contact' : '/inscription?redirect=/espace-delegues'}
+            class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-primary to-primary-dark text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+          >
+            Souscrire a l'offre delegues
+          </a>
+          <a
+            href="/tarifs"
+            class="inline-flex items-center justify-center px-8 py-4 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
+          >
+            Voir tous les tarifs
+          </a>
+        </div>
+      </div>
+    </SectionContainer>
+  </main>
+</Layout>

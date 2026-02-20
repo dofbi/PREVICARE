@@ -1,0 +1,267 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import SectionContainer from '../components/SectionContainer.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import TargetAudience from '../components/TargetAudience.astro';
+import StatCard from '../components/StatCard.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
+import PartnerLogos from '../components/PartnerLogos.astro';
+import { FileText, Shield, BarChart, Scale, Briefcase, UserCheck, CheckCircle, ArrowRight, TrendingUp } from 'lucide-react';
+---
+
+<Layout title="PREVICARE EMPLOI - La première conciergerie RH en Afrique">
+  <main class="flex min-h-screen flex-col items-center bg-accent">
+    <!-- Hero Section -->
+    <HeroSection transition:name="hero" />
+
+    <!-- Target Audience Section -->
+    <SectionContainer id="solutions" background="accent">
+      <SectionTitle
+        title="Une solution pour chaque acteur du monde du travail"
+        badge="Solutions sur-mesure"
+        badgeVariant="secondary"
+        subtitle="Que vous soyez du secteur privé local, expatrié ou ayez un besoin ponctuel, nous avons une solution adaptée."
+      />
+      <TargetAudience />
+    </SectionContainer>
+
+    <!-- Features Section -->
+    <SectionContainer background="white" decorative decorativeVariant="primary">
+      <div class="grid gap-12 lg:grid-cols-2 items-center">
+        <div class="space-y-4 animate-slide-in-left">
+          <SectionTitle
+            title="La première conciergerie RH en Afrique"
+            badge="Innovation"
+            align="left"
+            badgeVariant="secondary"
+          />
+          <p class="text-primary/80 md:text-lg">
+            PREVICARE EMPLOI ambitionne de devenir une référence digitale nationale dans le domaine de l'assistance
+            RH, en combinant technologie, accessibilité, conformité et impact social.
+          </p>
+
+          <ul class="space-y-3 mt-6">
+            <li class="flex items-start group">
+              <CheckCircle className="h-5 w-5 text-senegal-green mr-3 mt-1 flex-shrink-0" />
+              <span class="text-primary/90">Expérience utilisateur fluide, pensée mobile-first</span>
+            </li>
+            <li class="flex items-start group">
+              <CheckCircle className="h-5 w-5 text-senegal-green mr-3 mt-1 flex-shrink-0" />
+              <span class="text-primary/90">Assistant juridique intelligent (IA) pour les questions courantes</span>
+            </li>
+            <li class="flex items-start group">
+              <CheckCircle className="h-5 w-5 text-senegal-green mr-3 mt-1 flex-shrink-0" />
+              <span class="text-primary/90">Baromètre du climat social pour les entreprises</span>
+            </li>
+            <li class="flex items-start group">
+              <CheckCircle className="h-5 w-5 text-senegal-green mr-3 mt-1 flex-shrink-0" />
+              <span class="text-primary/90">Jurithèque complète et mise à jour</span>
+            </li>
+            <li class="flex items-start group">
+              <CheckCircle className="h-5 w-5 text-senegal-green mr-3 mt-1 flex-shrink-0" />
+              <span class="text-primary/90">Accès aux offres d'emploi pertinentes</span>
+            </li>
+            <li class="flex items-start group">
+              <CheckCircle className="h-5 w-5 text-senegal-green mr-3 mt-1 flex-shrink-0" />
+              <span class="text-primary/90">Paiements intégrés (Orange Money, Wave, CB)</span>
+            </li>
+          </ul>
+
+          <div class="pt-4">
+            <a
+              href="/a-propos"
+              class="inline-flex items-center px-6 py-3 bg-primary hover:bg-primary-dark text-white font-semibold rounded-lg shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all duration-300"
+            >
+              Découvrir notre mission
+              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </a>
+          </div>
+        </div>
+
+        <div class="relative animate-slide-in-right">
+          <div class="relative bg-gradient-light rounded-2xl shadow-card p-6 md:p-8 overflow-hidden">
+            <div class="grid grid-cols-1 gap-6">
+              <div class="flex items-center gap-4">
+                <div class="bg-secondary/20 p-3 rounded-full">
+                  <Scale className="h-8 w-8 text-secondary-dark" />
+                </div>
+                <div>
+                  <h3 class="font-bold text-primary text-lg">Conformité Juridique</h3>
+                  <p class="text-sm text-primary/80">
+                    Assurez votre conformité avec le droit du travail sénégalais.
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="bg-secondary/20 p-3 rounded-full">
+                  <Briefcase className="h-8 w-8 text-secondary-dark" />
+                </div>
+                <div>
+                  <h3 class="font-bold text-primary text-lg">Gestion de Carrière</h3>
+                  <p class="text-sm text-primary/80">
+                    Outils et conseils pour faire évoluer votre parcours professionnel.
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="bg-secondary/20 p-3 rounded-full">
+                  <UserCheck className="h-8 w-8 text-secondary-dark" />
+                </div>
+                <div>
+                  <h3 class="font-bold text-primary text-lg">Suivi Social</h3>
+                  <p class="text-sm text-primary/80">
+                    Contrôlez vos cotisations sociales (IPRES, CSS) en temps réel.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </SectionContainer>
+
+    <!-- Services Section -->
+    <SectionContainer background="pattern">
+      <SectionTitle
+        title="Une palette de services complète"
+        badge="Nos services"
+        badgeVariant="primary"
+        subtitle="De la mise à disposition de coffres-forts pour vos données RH, aux conseils personnalisés et à la protection juridique."
+      />
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <ServiceCard
+          icon={Shield}
+          title="Archivage Sécurisé"
+          description="Conservation chiffrée de vos documents RH importants avec accès permanent."
+          link="/services/archivage"
+          variant="primary"
+        />
+        <ServiceCard
+          icon={BarChart}
+          title="Suivi IPRES"
+          description="Monitoring de vos cotisations et alertes en cas d'anomalies détectées."
+          link="/services/ipres"
+          variant="secondary"
+        />
+        <ServiceCard
+          icon={FileText}
+          title="Conseil Juridique"
+          description="Assistance personnalisée pour tous vos besoins en droit du travail."
+          link="/services/juridique"
+          variant="primary"
+        />
+        <ServiceCard
+          icon={TrendingUp}
+          title="Gestion de carrière"
+          description="Accompagnement pour votre évolution professionnelle."
+          link="/services/carriere"
+          variant="highlight"
+        />
+      </div>
+    </SectionContainer>
+
+    <!-- Stats Section -->
+    <SectionContainer background="white">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+        <StatCard
+          number="5,000+"
+          label="Utilisateurs actifs"
+          description="Professionnels qui nous font confiance"
+          trend="up"
+        />
+        <StatCard
+          number="98%"
+          label="Taux de satisfaction"
+          description="Clients satisfaits de nos services"
+          trend="up"
+        />
+        <StatCard
+          number="24/7"
+          label="Support client"
+          description="Assistance disponible à tout moment"
+        />
+        <StatCard
+          number="100%"
+          label="Sécurité des données"
+          description="Protection maximale de vos informations"
+        />
+      </div>
+    </SectionContainer>
+
+    <!-- Testimonials Section -->
+    <SectionContainer background="accent" decorative decorativeVariant="secondary">
+      <SectionTitle
+        title="Ils nous font confiance"
+        badge="Témoignages"
+        badgeVariant="primary"
+        subtitle="Découvrez les témoignages de nos utilisateurs satisfaits."
+      />
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <TestimonialCard
+          quote="Grâce à PREVICARE EMPLOI, je peux suivre mes cotisations IPRES et archiver tous mes documents importants en toute sécurité."
+          author="Thomas K."
+          company="Employé"
+          rating={5}
+          image="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=300&auto=format&fit=crop"
+        />
+        <TestimonialCard
+          quote="La plateforme nous a permis de simplifier considérablement notre gestion administrative et d'améliorer notre conformité légale."
+          author="Agathe M."
+          company="Responsable RH"
+          rating={5}
+          image="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=300&auto=format&fit=crop"
+        />
+        <TestimonialCard
+          quote="Un outil indispensable pour gérer mes contrats et mes droits en tant qu'expatrié au Sénégal."
+          author="Aurélien D."
+          company="Expatrié"
+          rating={5}
+          image="https://images.unsplash.com/photo-1566492031773-4f4e44671857?q=80&w=300&auto=format&fit=crop"
+        />
+      </div>
+    </SectionContainer>
+
+    <!-- Partners Section -->
+    <SectionContainer background="white">
+      <SectionTitle
+        title="Nos partenaires"
+        badge="Partenaires"
+        badgeVariant="secondary"
+        subtitle="PREVICARE EMPLOI collabore avec des institutions reconnues pour vous offrir le meilleur service."
+      />
+      <PartnerLogos />
+    </SectionContainer>
+
+    <!-- CTA Section - Call to Action (version PREVICARE différente de V1) -->
+    <section class="bg-gradient-primary py-16 md:py-20 w-full">
+      <div class="container mx-auto px-4 md:px-6 text-center">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+            Prêt à simplifier votre gestion RH ?
+          </h2>
+          <p class="text-lg md:text-xl text-white/90 mb-8 max-w-3xl mx-auto">
+            Rejoignez PREVICARE EMPLOI dès aujourd'hui et bénéficiez d'un accompagnement personnalisé.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="/inscription"
+              class="btn-cta-primary inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-lg transition-all duration-300 hover:scale-105"
+            >
+              S'inscrire maintenant
+            </a>
+            <a
+              href="/contact"
+              class="btn-cta-secondary inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-lg transition-all duration-300 hover:scale-105"
+            >
+              Nous contacter
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

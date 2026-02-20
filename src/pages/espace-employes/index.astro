@@ -1,0 +1,370 @@
+
+---
+import Layout from '../../layouts/Layout.astro';
+import DashboardShell from '../../components/DashboardShell.astro';
+import { notificationService } from '../../lib/notificationService.ts';
+import { createClient } from '../../lib/supabase';
+import { SubscriptionService } from '../../lib/subscriptionService';
+
+const { user } = Astro.locals;
+
+// Vérifier si l'utilisateur est connecté
+if (!user) {
+  return Astro.redirect('/connexion');
+}
+
+// Vérifier si l'utilisateur a le bon rôle
+const userRole = user.user_metadata?.role;
+
+if (userRole !== 'employee') {
+  return Astro.redirect('/connexion');
+}
+
+// Vérifier l'abonnement actif
+const supabase = createClient({ request: Astro.request, cookies: Astro.cookies });
+const subscriptionService = new SubscriptionService(supabase);
+const activeSubscription = await subscriptionService.getUserSubscription(user.id);
+const hasActiveSubscription = activeSubscription && activeSubscription.status === 'active';
+
+// Charger les notifications pour l'aperçu
+await notificationService.loadNotifications();
+const recentNotifications = notificationService.getNotifications({ read: false }).slice(0, 3);
+const unreadCount = notificationService.getUnreadCount();
+---
+
+<Layout title="Espace Employés - PREVICARE EMPLOI">
+  <DashboardShell title="Espace Employés">
+    
+    {/* Bannière de rappel d'abonnement */}
+    {!hasActiveSubscription && (
+      <div class="mb-6 rounded-xl p-6 shadow-lg" style="background: linear-gradient(to right, #1e3a5f, #c9a227);">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 p-3 bg-white/20 rounded-lg">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-white">Protégez votre carrière dès maintenant</h3>
+              <p class="text-white/90 text-sm mt-1">
+                Vous n'avez pas encore d'abonnement actif. Bénéficiez de la protection juridique 
+                de conseils personnalisés.
+              </p>
+            </div>
+          </div>
+          <a 
+            href="/tarifs" 
+            class="inline-flex items-center justify-center px-6 py-3 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-md flex-shrink-0"
+          >
+            Voir les offres
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    )}
+
+    <!-- Hero Section -->
+    <div class="relative w-full h-48 mb-6 rounded-xl overflow-hidden">
+      <div
+        class="absolute inset-0 z-0"
+        style="background-image: url('https://images.unsplash.com/photo-1664575602554-2087b04935a5?q=80&w=2070&auto=format&fit=crop'); background-size: cover; background-position: center;"
+      >
+        <div class="absolute inset-0 bg-gradient-to-r from-secondary/80 to-secondary/60"></div>
+      </div>
+
+      <div class="relative h-full flex flex-col justify-center px-6 z-10">
+        <h1 class="text-2xl font-bold tracking-wide text-white">
+          Bienvenue dans votre espace personnel
+        </h1>
+        <p class="text-white/90">Accédez à vos documents, informations et services</p>
+        {user.user_metadata?.first_name && (
+          <p class="text-sm text-white/70">
+            {user.user_metadata.first_name} {user.user_metadata.last_name}
+          </p>
+        )}
+      </div>
+    </div>
+
+    <!-- Aperçu rapide -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+      
+      <!-- Widget Notifications -->
+      <div class="bg-white rounded-lg shadow">
+        <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <h3 class="text-lg font-medium text-gray-900">Notifications</h3>
+            {unreadCount > 0 && (
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                {unreadCount} {unreadCount > 1 ? 'nouvelles' : 'nouvelle'}
+              </span>
+            )}
+          </div>
+          <a href="/espace-employes/notifications" class="text-sm text-blue-600 hover:text-blue-700 font-medium">
+            Voir tout →
+          </a>
+        </div>
+        <div class="divide-y divide-gray-200">
+          {recentNotifications.length === 0 ? (
+            <div class="px-6 py-8 text-center">
+              <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM10.5 17H8a2 2 0 01-2-2V5a2 2 0 012-2h8a2 2 0 012 2v4.5" />
+              </svg>
+              <p class="mt-2 text-sm text-gray-500">Aucune nouvelle notification</p>
+            </div>
+          ) : (
+            recentNotifications.map((notification) => (
+              <div key={notification.id} class="px-6 py-4 hover:bg-gray-50 transition-colors">
+                <div class="flex items-start space-x-3">
+                  {notification.type === 'urgent' ? (
+                    <svg class="h-5 w-5 text-red-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.664-.833-2.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                    </svg>
+                  ) : notification.type === 'success' ? (
+                    <svg class="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  ) : (
+                    <svg class="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  )}
+                  <div class="flex-1 min-w-0">
+                    <p class="text-sm font-medium text-gray-900">
+                      {notification.title}
+                      {notification.type === 'urgent' && (
+                        <span class="ml-2 px-2 py-0.5 text-xs font-medium bg-red-100 text-red-800 rounded-full">
+                          URGENT
+                        </span>
+                      )}
+                    </p>
+                    <p class="text-sm text-gray-600 mt-1 line-clamp-2">{notification.message}</p>
+                    {notification.action_url && (
+                      <a href={notification.action_url} class="text-xs text-blue-600 hover:text-blue-700 font-medium mt-2 inline-block">
+                        {notification.action_label || 'Voir plus'} →
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+
+      <!-- Widget Ressources Assistance -->
+      <div class="bg-white rounded-lg shadow">
+        <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+          <h3 class="text-lg font-medium text-gray-900">Ressources utiles</h3>
+          <a href="/espace-employes/assistance" class="text-sm text-blue-600 hover:text-blue-700 font-medium">
+            Centre d'aide →
+          </a>
+        </div>
+        <div class="p-6 space-y-3">
+          <a href="/espace-employes/assistance/faq" class="block p-3 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-colors">
+            <div class="flex items-center space-x-3">
+              <div class="flex-shrink-0 p-2 bg-blue-100 rounded-lg">
+                <svg class="h-5 w-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm font-medium text-gray-900">Questions fréquentes (FAQ)</p>
+                <p class="text-xs text-gray-500">Réponses aux questions courantes</p>
+              </div>
+            </div>
+          </a>
+
+          <a href="/espace-employes/assistance#guide" class="block p-3 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-colors">
+            <div class="flex items-center space-x-3">
+              <div class="flex-shrink-0 p-2 bg-green-100 rounded-lg">
+                <svg class="h-5 w-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm font-medium text-gray-900">Guide utilisateur</p>
+                <p class="text-xs text-gray-500">Documentation complète</p>
+              </div>
+            </div>
+          </a>
+
+          <a href="/espace-employes/assistance#contact" class="block p-3 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-colors">
+            <div class="flex items-center space-x-3">
+              <div class="flex-shrink-0 p-2 bg-purple-100 rounded-lg">
+                <svg class="h-5 w-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm font-medium text-gray-900">Contact support</p>
+                <p class="text-xs text-gray-500">Parlez à notre équipe</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Services disponibles -->
+    <div class="mt-8">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-6">Vos Services</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Documents -->
+        <a href="/espace-employes/documents" class="block">
+          <div class="bg-white rounded-lg border shadow-sm p-6 hover:shadow-lg transition-shadow">
+            <div class="flex items-center space-x-4">
+              <div class="p-3 bg-blue-100 rounded-lg">
+                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900">Mes Documents</h3>
+                <p class="text-sm text-gray-600">Coffre-fort numérique sécurisé</p>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        {/* _ipres */}
+        {/*
+        <a href="/espace-employes/ipres" class="block">
+          <div class="bg-white rounded-lg border shadow-sm p-6 hover:shadow-lg transition-shadow">
+            <div class="flex items-center space-x-4">
+              <div class="p-3 bg-green-100 rounded-lg">
+                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900">Suivi IPRES</h3>
+                <p class="text-sm text-gray-600">Cotisations et projections</p>
+              </div>
+            </div>
+          </div>
+        </a>
+        */}
+
+        <!-- Juridique -->
+        <a href="/espace-employes/juridique" class="block">
+          <div class="bg-white rounded-lg border shadow-sm p-6 hover:shadow-lg transition-shadow border-l-4 border-l-red-500">
+            <div class="flex items-center space-x-4">
+              <div class="p-3 bg-red-100 rounded-lg">
+                <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900">Conseil Juridique</h3>
+                <p class="text-sm text-gray-600">Protection juridique professionnelle</p>
+                <span class="inline-flex items-center px-2 py-1 text-xs bg-red-100 text-red-800 rounded-full mt-1">
+                  Nouveau
+                </span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        {/* _carriere */}
+        {/*
+        <a href="/espace-employes/carriere" class="block">
+          <div class="bg-white rounded-lg border shadow-sm p-6 hover:shadow-lg transition-shadow">
+            <div class="flex items-center space-x-4">
+              <div class="p-3 bg-purple-100 rounded-lg">
+                <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2h8z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900">Ma Carrière</h3>
+                <p class="text-sm text-gray-600">Évolution professionnelle</p>
+              </div>
+            </div>
+          </div>
+        </a>
+        */}
+
+        <!-- Assistance -->
+        <a href="/espace-employes/assistance" class="block">
+          <div class="bg-white rounded-lg border shadow-sm p-6 hover:shadow-lg transition-shadow">
+            <div class="flex items-center space-x-4">
+              <div class="p-3 bg-orange-100 rounded-lg">
+                <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900">Assistance</h3>
+                <p class="text-sm text-gray-600">Support et aide</p>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Notifications -->
+        <a href="/espace-employes/notifications" class="block">
+          <div class="bg-white rounded-lg border shadow-sm p-6 hover:shadow-lg transition-shadow">
+            <div class="flex items-center space-x-4">
+              <div class="p-3 bg-indigo-100 rounded-lg">
+                <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900">Notifications</h3>
+                <p class="text-sm text-gray-600">Messages et alertes</p>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Abonnement -->
+        <a href="/espace-employes/abonnement" class="block">
+          <div class="bg-white rounded-lg border shadow-sm p-6 hover:shadow-lg transition-shadow border-l-4 border-l-primary">
+            <div class="flex items-center space-x-4">
+              <div class="p-3 bg-primary/10 rounded-lg">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900">Mon Abonnement</h3>
+                <p class="text-sm text-gray-600">Contrat et factures</p>
+                <span class="inline-flex items-center px-2 py-1 text-xs bg-primary/10 text-primary rounded-full mt-1">
+                  Nouveau
+                </span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Demandes d'assistance -->
+        <a href="/espace-employes/tickets" class="block">
+          <div class="bg-white rounded-lg border shadow-sm p-6 hover:shadow-lg transition-shadow border-l-4 border-l-amber-500">
+            <div class="flex items-center space-x-4">
+              <div class="p-3 bg-amber-100 rounded-lg">
+                <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900">Mes Demandes</h3>
+                <p class="text-sm text-gray-600">Assistance et support</p>
+                <span class="inline-flex items-center px-2 py-1 text-xs bg-amber-100 text-amber-800 rounded-full mt-1">
+                  Nouveau
+                </span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+  </DashboardShell>
+</Layout>
