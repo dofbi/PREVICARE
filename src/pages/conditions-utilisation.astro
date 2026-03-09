@@ -1,0 +1,233 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionContainer from '../components/SectionContainer.astro';
+---
+
+<Layout title="Conditions d'Utilisation - PREVICARE EMPLOI">
+  <main class="flex min-h-screen flex-col">
+    <!-- Hero Section -->
+    <section class="relative w-full py-20 md:py-28 overflow-hidden">
+      <!-- Image de fond -->
+      <div
+        class="absolute inset-0 z-0"
+        style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2070&auto=format&fit=crop'); background-size: cover; background-position: center;"
+      >
+        <!-- Overlay pour améliorer la lisibilité -->
+        <div class="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/70"></div>
+      </div>
+
+      <div class="container relative px-4 md:px-6 z-10">
+        <div class="flex flex-col items-center text-center space-y-4 mb-8">
+          <h1 class="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-white">
+            Conditions d'Utilisation
+          </h1>
+          <p class="max-w-[700px] text-white/90 md:text-xl">
+            Veuillez lire attentivement nos conditions d'utilisation avant d'utiliser PREVICARE EMPLOI.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Legal Content Section -->
+    <SectionContainer background="white" className="py-16 md:py-24">
+      <div class="max-w-4xl mx-auto">
+        <!-- Table of Contents -->
+        <div class="mb-12 p-6 bg-blue-50 border-l-4 border-primary rounded-lg">
+          <h2 class="text-lg font-semibold text-gray-900 mb-3">Table des matières</h2>
+          <nav class="space-y-1 text-sm">
+            <p class="text-blue-600 block">1. Acceptation des Conditions</p>
+            <p class="text-blue-600 block">2. Description du Service</p>
+            <p class="text-blue-600 block">3. Éligibilité</p>
+            <p class="text-blue-600 block">4. Compte Utilisateur</p>
+            <p class="text-blue-600 block">5. Propriété Intellectuelle</p>
+            <p class="text-blue-600 block">6. Données Personnelles et Confidentialité</p>
+            <p class="text-blue-600 block">7. Utilisation Acceptable</p>
+            <p class="text-blue-600 block">8. Limitation de Responsabilité</p>
+          </nav>
+        </div>
+
+        <!-- Legal Content -->
+        <div class="space-y-8 text-gray-700 leading-relaxed">
+          <div>
+            <p class="text-sm text-gray-500 italic mb-4"><strong>Dernière mise à jour :</strong> novembre 2025</p>
+            <p class="mb-4">Bienvenue sur PREVICARE EMPLOI. Les présentes conditions d'utilisation régissent votre accès et votre utilisation de notre plateforme. En accédant à notre site ou en utilisant nos services, vous acceptez d'être lié par ces conditions.</p>
+          </div>
+
+          <section>
+            <h2 class="text-2xl font-bold text-gray-900 mb-3">1. Acceptation des Conditions</h2>
+            <p>En utilisant PREVICARE EMPLOI, vous acceptez les présentes conditions d'utilisation dans leur intégralité. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser notre plateforme.</p>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-bold text-gray-900 mb-3">2. Description du Service</h2>
+            <p class="mb-3">PREVICARE EMPLOI est une plateforme numérique dédiée à la gestion des ressources humaines et des avantages sociaux pour les employés en Afrique de l'Ouest, particulièrement au Sénégal. Nos services incluent :</p>
+            <ul class="list-disc list-inside space-y-2">
+              <li>Archivage numérique sécurisé de documents</li>
+              {/* <li>Suivi des cotisations IPRES</li> */}
+              <li>Conseil juridique professionnel</li>
+              {/* <li>Gestion de carrière</li> */}
+              <li>Assistance virtuelle IA</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-bold text-gray-900 mb-3">3. Éligibilité</h2>
+            <p class="mb-3">Vous garantissez que :</p>
+            <ul class="list-disc list-inside space-y-2">
+              <li>Vous avez au moins 18 ans</li>
+              <li>Vous avez le pouvoir légal de conclure ces conditions</li>
+              <li>Vous résidez en Afrique de l'Ouest (particulièrement au Sénégal)</li>
+              <li>Vous n'utiliserez pas la plateforme à des fins illégales ou non autorisées</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-bold text-gray-900 mb-3">4. Compte Utilisateur</h2>
+            
+            <h3 class="text-xl font-semibold text-gray-900 mt-4 mb-2">4.1 Création de Compte</h3>
+            <p class="mb-3">Pour accéder à certains services, vous devez créer un compte avec :</p>
+            <ul class="list-disc list-inside space-y-2">
+              <li>Une adresse email valide</li>
+              <li>Un mot de passe sécurisé</li>
+              <li>Vos informations personnelles exactes et complètes</li>
+              <li>Votre rôle professionnel (employé local, expatrié, employeur, ou délégué)</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold text-gray-900 mt-4 mb-2">4.2 Responsabilité du Compte</h3>
+            <p class="mb-3">Vous êtes responsable de :</p>
+            <ul class="list-disc list-inside space-y-2">
+              <li>La confidentialité de vos identifiants</li>
+              <li>Toute activité effectuée sous votre compte</li>
+              <li>La mise à jour de vos informations personnelles</li>
+              <li>La notification immédiate d'accès non autorisé</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold text-gray-900 mt-4 mb-2">4.3 Suspension du Compte</h3>
+            <p class="mb-3">Nous nous réservons le droit de suspendre ou supprimer votre compte si :</p>
+            <ul class="list-disc list-inside space-y-2">
+              <li>Vous violez ces conditions</li>
+              <li>Vous utilisez la plateforme de manière abusive</li>
+              <li>Vous fournirez des informations fausses ou trompeuses</li>
+              <li>Vous vous engagez dans des activités illégales</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-bold text-gray-900 mb-3">5. Propriété Intellectuelle</h2>
+            <p class="mb-3">Tous les contenus, logos, textes, images, vidéos et fonctionnalités de PREVICARE EMPLOI sont la propriété exclusive de PREVICARE EMPLOI ou de ses concédants de licence.</p>
+            <p class="mb-3">Vous ne pouvez pas :</p>
+            <ul class="list-disc list-inside space-y-2">
+              <li>Reproduire ou copier le contenu sans permission écrite</li>
+              <li>Modifier, adapter ou créer des œuvres dérivées</li>
+              <li>Vendre, louer ou transférer le contenu</li>
+              <li>Utiliser le contenu à des fins commerciales sans autorisation</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-bold text-gray-900 mb-3">6. Données Personnelles et Confidentialité</h2>
+            
+            <h3 class="text-xl font-semibold text-gray-900 mt-4 mb-2">6.1 Collecte de Données</h3>
+            <p class="mb-3">Nous collectons et traitons vos données personnelles pour :</p>
+            <ul class="list-disc list-inside space-y-2">
+              <li>Fournir et améliorer nos services</li>
+              <li>Vous contacter</li>
+              <li>Respecter les obligations légales</li>
+              <li>Prévenir la fraude</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold text-gray-900 mt-4 mb-2">6.2 Sécurité des Données</h3>
+            <p class="mb-3">Vos données sont protégées par :</p>
+            <ul class="list-disc list-inside space-y-2">
+              <li>Chiffrement SSL/TLS</li>
+              <li>Chiffrement de bout en bout pour les documents sensibles</li>
+              <li>Authentification multifacteurs disponible</li>
+              <li>Audit de sécurité régulier</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-bold text-gray-900 mb-3">7. Utilisation Acceptable</h2>
+            
+            <h3 class="text-xl font-semibold text-gray-900 mt-4 mb-2">7.1 Interdictions</h3>
+            <p class="mb-3">Vous acceptez de ne pas utiliser la plateforme pour :</p>
+            <ul class="list-disc list-inside space-y-2">
+              <li>Activités illégales ou immorales</li>
+              <li>Harcèlement, intimidation ou discrimination</li>
+              <li>Fraude, usurpation d'identité ou tromperie</li>
+              <li>Accès non autorisé aux systèmes</li>
+              <li>Transmission de malware ou de code malveillant</li>
+              <li>Spam ou communication non sollicitée</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-bold text-gray-900 mb-3">8. Limitation de Responsabilité</h2>
+            <p class="mb-3">Sauf disposition contraire de la loi, PREVICARE EMPLOI ne sera pas responsable de :</p>
+            <ul class="list-disc list-inside space-y-2">
+              <li>Les pertes de données</li>
+              <li>Les pertes de revenus</li>
+              <li>Les pertes indirectes ou consécutives</li>
+              <li>Les dommages accidentels</li>
+              <li>Les interruptions de service</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-bold text-gray-900 mb-3">9. Droit Applicable</h2>
+            <p>Ces conditions sont régies par les lois du Sénégal. Tout litige sera soumis aux tribunaux compétents du Sénégal.</p>
+          </section>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="mt-12 p-6 bg-gray-50 border border-gray-200 rounded-lg">
+          <h3 class="text-lg font-semibold text-gray-900 mb-4">Des questions sur nos conditions ?</h3>
+          <p class="text-gray-600 mb-4">
+            Si vous avez des questions ou des préoccupations concernant ces conditions d'utilisation, n'hésitez pas à nous contacter.
+          </p>
+          <div class="space-y-2">
+            <p class="text-gray-700"><span class="font-semibold">Email :</span> <a href="mailto:contact@previcare-emploi.sn" class="text-blue-600 hover:text-blue-700">contact@previcare-emploi.sn</a></p>
+            <p class="text-gray-700"><span class="font-semibold">Téléphone :</span> <a href="tel:+221331234567" class="text-blue-600 hover:text-blue-700">+221 33 123 45 67</a></p>
+            <p class="text-gray-700"><span class="font-semibold">Adresse :</span> 123 Avenue Cheikh Anta Diop, Dakar, Sénégal</p>
+          </div>
+        </div>
+      </div>
+    </SectionContainer>
+
+    <!-- CTA Section -->
+    <SectionContainer background="gradient-primary" className="py-16 md:py-24 text-white">
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-white/10 backdrop-blur-sm p-8 md:p-12 rounded-2xl border border-white/20 shadow-xl">
+          <div class="flex flex-col items-center justify-center space-y-4 text-center">
+            <h2 class="text-3xl font-bold tracking-tighter sm:text-4xl">
+              Prêt à rejoindre PREVICARE EMPLOI ?
+            </h2>
+            <p class="max-w-[700px] md:text-xl">
+              Créez un compte en quelques minutes et commencez à utiliser nos services dès maintenant.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 mt-6">
+              <a
+                href="/inscription"
+                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-primary hover:bg-gray-100 h-11 px-8"
+              >
+                <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
+                </svg>
+                Créer un compte
+              </a>
+              <a
+                href="/connexion"
+                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border-white text-white bg-white/20 hover:bg-white/30 h-11 px-8"
+              >
+                <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v2a2 2 0 01-2 2H7a2 2 0 01-2-2v-2"></path>
+                </svg>
+                Se connecter
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </SectionContainer>
+  </main>
+</Layout>

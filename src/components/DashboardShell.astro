@@ -1,0 +1,214 @@
+
+---
+import { FloatingAssistant } from './employee/FloatingAssistant.tsx';
+
+const { user } = Astro.locals;
+
+if (!user) {
+  return Astro.redirect('/connexion');
+}
+
+const currentPath = Astro.url.pathname;
+
+const navigationItems = [
+  {
+    name: 'Tableau de bord',
+    href: '/espace-employes',
+    icon: 'home',
+    current: currentPath === '/espace-employes'
+  },
+  {
+    name: 'Documents',
+    href: '/espace-employes/documents',
+    icon: 'document',
+    current: currentPath.startsWith('/espace-employes/documents')
+  },
+  // {
+  //   name: 'IPRES',
+  //   href: '/espace-employes/ipres',
+  //   icon: 'chart',
+  //   current: currentPath.startsWith('/espace-employes/ipres')
+  // },
+  {
+    name: 'Juridique',
+    href: '/espace-employes/juridique',
+    icon: 'shield',
+    current: currentPath.startsWith('/espace-employes/juridique')
+  },
+  // {
+  //   name: 'Carrière',
+  //   href: '/espace-employes/carriere',
+  //   icon: 'briefcase',
+  //   current: currentPath.startsWith('/espace-employes/carriere')
+  // },
+  {
+    name: 'Assistance',
+    href: '/espace-employes/assistance',
+    icon: 'support',
+    current: currentPath.startsWith('/espace-employes/assistance')
+  },
+  {
+    name: 'Notifications',
+    href: '/espace-employes/notifications',
+    icon: 'bell',
+    current: currentPath.startsWith('/espace-employes/notifications')
+  }
+];
+---
+
+<div class="min-h-screen bg-gray-50 flex flex-col md:flex-row">
+  <!-- Sidebar -->
+  <div class="hidden md:flex md:w-64 md:flex-col">
+    <div class="flex flex-col bg-white border-r border-gray-200">
+      <div class="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
+        <div class="flex items-center flex-shrink-0 px-4">
+          <a href="/espace-employes" class="flex items-center">
+            <img class="h-8 w-auto" src="/logo-previcare.png" alt="PREVICARE">
+            <span class="ml-2 text-xl font-semibold text-gray-900">PREVICARE</span>
+          </a>
+        </div>
+        <nav class="mt-8 flex-1 px-2 space-y-1">
+          {navigationItems.map((item) => (
+            <a
+              href={item.href}
+              class={`${
+                item.current
+                  ? 'bg-blue-50 border-r-4 border-blue-500 text-blue-700'
+                  : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+              } group flex items-center px-2 py-2 text-sm font-medium rounded-md transition-colors`}
+            >
+              {item.icon === 'home' && (
+                <svg class={`${item.current ? 'text-blue-500' : 'text-gray-400'} mr-3 flex-shrink-0 h-6 w-6`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+              )}
+              {item.icon === 'document' && (
+                <svg class={`${item.current ? 'text-blue-500' : 'text-gray-400'} mr-3 flex-shrink-0 h-6 w-6`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              )}
+              {/* {item.icon === 'chart' && (
+                <svg class={`${item.current ? 'text-blue-500' : 'text-gray-400'} mr-3 flex-shrink-0 h-6 w-6`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+              )} */}
+              {item.icon === 'shield' && (
+                <svg class={`${item.current ? 'text-blue-500' : 'text-gray-400'} mr-3 flex-shrink-0 h-6 w-6`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              )}
+              {/* {item.icon === 'briefcase' && (
+                <svg class={`${item.current ? 'text-blue-500' : 'text-gray-400'} mr-3 flex-shrink-0 h-6 w-6`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2h8z" />
+                </svg>
+              )} */}
+              {item.icon === 'support' && (
+                <svg class={`${item.current ? 'text-blue-500' : 'text-gray-400'} mr-3 flex-shrink-0 h-6 w-6`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              )}
+              {item.icon === 'bell' && (
+                <svg class={`${item.current ? 'text-blue-500' : 'text-gray-400'} mr-3 flex-shrink-0 h-6 w-6`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5z" />
+                </svg>
+              )}
+              {item.name}
+            </a>
+          ))}
+        </nav>
+      </div>
+      <div class="flex-shrink-0 flex border-t border-gray-200 p-4">
+        <a href="/espace-employes/parametres" class="flex-shrink-0 w-full group block">
+          <div class="flex items-center">
+            <div>
+              <img class="inline-block h-9 w-9 rounded-full" src="/placeholder-user.jpg" alt="">
+            </div>
+            <div class="ml-3">
+              <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
+                {user.user_metadata?.first_name} {user.user_metadata?.last_name}
+              </p>
+              <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
+                Voir le profil
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="flex flex-col flex-1">
+    <div class="sticky top-0 z-10 md:hidden pl-1 pt-1 sm:pl-3 sm:pt-3 bg-gray-50">
+      <button type="button" class="-ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+        <span class="sr-only">Open sidebar</span>
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+    <main class="flex-1">
+      <div class="py-6 pb-4 md:pb-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+          <slot />
+        </div>
+      </div>
+    </main>
+
+    <!-- Navigation mobile intégrée (visible uniquement sur mobile, suit le scroll) -->
+    <nav class="md:hidden bg-white border-t shadow-lg">
+      <div class="grid grid-cols-4 gap-1 px-2 py-3">
+        {navigationItems.map((item) => (
+          <a 
+            href={item.href} 
+            class={`flex flex-col items-center justify-center p-2 text-xs rounded-lg transition-colors ${
+              item.current 
+                ? 'text-blue-600 bg-blue-50' 
+                : 'text-gray-600 hover:text-blue-600 hover:bg-gray-50'
+            }`}
+          >
+            {item.icon === 'home' && (
+              <svg class={`h-5 w-5 mb-1 ${item.current ? 'text-blue-600' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+            )}
+            {item.icon === 'document' && (
+              <svg class={`h-5 w-5 mb-1 ${item.current ? 'text-blue-600' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+             )}
+             {/* {item.icon === 'chart' && (
+               <svg class={`h-5 w-5 mb-1 ${item.current ? 'text-blue-600' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+               </svg>
+             )} */}
+             {item.icon === 'shield' && (
+              <svg class={`h-5 w-5 mb-1 ${item.current ? 'text-blue-600' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+             )}
+             {/* {item.icon === 'briefcase' && (
+               <svg class={`h-5 w-5 mb-1 ${item.current ? 'text-blue-600' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2h8z" />
+               </svg>
+             )} */}
+             {item.icon === 'support' && (
+              <svg class={`h-5 w-5 mb-1 ${item.current ? 'text-blue-600' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+            )}
+            {item.icon === 'bell' && (
+              <svg class={`h-5 w-5 mb-1 ${item.current ? 'text-blue-600' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+              </svg>
+            )}
+            <span class="font-medium">{item.name}</span>
+          </a>
+        ))}
+      </div>
+    </nav>
+  </div>
+  
+  <!-- Assistant virtuel flottant (disponible sur toutes les pages) -->
+  <FloatingAssistant client:load />
+</div>

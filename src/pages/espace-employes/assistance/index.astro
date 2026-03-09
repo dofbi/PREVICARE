@@ -1,0 +1,132 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import DashboardShell from '../../../components/DashboardShell.astro';
+import { AssistanceChat } from '../../../components/employee/AssistanceChat.tsx';
+
+const { user } = Astro.locals;
+
+if (!user) {
+  return Astro.redirect('/connexion');
+}
+---
+
+<Layout title="Centre d'Aide - PREVICARE EMPLOI">
+  <DashboardShell title="Centre d'Aide">
+
+    <!-- Breadcrumbs -->
+    <nav class="flex mb-6" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-4">
+        <li><a href="/espace-employes" class="text-gray-400 hover:text-gray-500">Tableau de bord</a></li>
+        <li><span class="text-gray-300">/</span></li>
+        <li><span class="text-gray-500">Assistance</span></li>
+      </ol>
+    </nav>
+
+    <!-- En-tête Centre d'Aide -->
+    <div class="mb-8 rounded-xl p-6 shadow-lg" style="background: linear-gradient(135deg, #0f766e 0%, #14b8a6 100%);">
+      <div class="flex flex-col md:flex-row md:items-center gap-4">
+        <div class="flex items-center gap-4">
+          <div class="flex-shrink-0 w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center">
+            <svg class="w-9 h-9 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-2xl font-bold text-white">Centre d'Aide</h1>
+            <p class="text-white/80 text-sm">Trouvez des réponses et obtenez du support</p>
+          </div>
+        </div>
+        <div class="md:ml-auto flex flex-wrap gap-3">
+          <a href="/espace-employes/tickets/nouveau" class="flex items-center gap-2 bg-white text-teal-700 hover:bg-white/90 rounded-lg px-4 py-2 text-sm font-semibold transition-colors shadow">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+            Créer un ticket
+          </a>
+        </div>
+      </div>
+      <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-3">
+        <div class="bg-white/10 rounded-lg p-3">
+          <p class="text-white/60 text-xs mb-1">Assistant IA</p>
+          <p class="text-white text-sm font-medium">Guide de l'application</p>
+        </div>
+        <div class="bg-white/10 rounded-lg p-3">
+          <p class="text-white/60 text-xs mb-1">Support</p>
+          <p class="text-white text-sm font-medium">Tickets & suivi</p>
+        </div>
+        <div class="bg-white/10 rounded-lg p-3">
+          <p class="text-white/60 text-xs mb-1">FAQ</p>
+          <p class="text-white text-sm font-medium">Questions fréquentes</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Accès rapides -->
+    <div class="grid gap-4 mb-8 md:grid-cols-2">
+
+      <!-- FAQ -->
+      <a href="/espace-employes/assistance/faq" class="bg-white border-2 border-gray-200 hover:border-teal-400 hover:bg-teal-50 rounded-xl p-5 transition-all group">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 bg-teal-100 rounded-xl flex items-center justify-center flex-shrink-0">
+            <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div>
+            <p class="font-semibold text-gray-900 text-sm group-hover:text-teal-700">Foire aux Questions</p>
+            <p class="text-xs text-gray-500">Réponses aux questions courantes</p>
+          </div>
+        </div>
+        <p class="text-gray-600 text-xs">Documents, juridique, technique, abonnements…</p>
+        <p class="text-teal-600 text-xs font-medium mt-3 group-hover:text-teal-700">Consulter la FAQ →</p>
+      </a>
+
+      <!-- Tickets -->
+      <a href="/espace-employes/tickets" class="bg-white border-2 border-gray-200 hover:border-blue-400 hover:bg-blue-50 rounded-xl p-5 transition-all group">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+          </div>
+          <div>
+            <p class="font-semibold text-gray-900 text-sm group-hover:text-blue-700">Mes Tickets</p>
+            <p class="text-xs text-gray-500">Suivi de vos demandes de support</p>
+          </div>
+        </div>
+        <p class="text-gray-600 text-xs">Consultez l'état de vos tickets et créez de nouvelles demandes.</p>
+        <p class="text-blue-600 text-xs font-medium mt-3 group-hover:text-blue-700">Voir mes tickets →</p>
+      </a>
+
+    </div>
+
+    <!-- Assistant PREVICARE — Chat complet -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 mb-8">
+      <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-gray-900">Assistant PREVICARE</h3>
+            <p class="text-sm text-gray-500 mt-0.5">Guide interactif — navigation et fonctionnalités de l'application</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+          <span class="text-xs text-gray-500">Disponible</span>
+        </div>
+      </div>
+      <div class="p-6">
+        <AssistanceChat
+          variant="full"
+          assistantType="previcare"
+          client:load
+        />
+      </div>
+    </div>
+
+  </DashboardShell>
+</Layout>

@@ -1,0 +1,317 @@
+---
+import Layout from '../layouts/Layout.astro';
+import DashboardShell from '../components/DashboardShell.astro';
+import { DocumentList } from '../components/DocumentList.tsx';
+import { NotificationList } from '../components/NotificationList.tsx';
+
+const { user } = Astro.locals;
+
+// Vérifier si l'utilisateur est connecté
+if (!user) {
+  return Astro.redirect('/connexion');
+}
+
+// Vérifier si l'utilisateur a le bon rôle
+const userRole = user.user_metadata?.role;
+
+if (userRole !== 'delegate') {
+  return Astro.redirect('/connexion');
+}
+---
+
+<Layout title="Espace Délégués - PREVICARE EMPLOI">
+  <DashboardShell title="Tableau de bord Délégué du Personnel">
+
+    <!-- Hero Section -->
+    <div class="relative w-full h-48 mb-6 rounded-xl overflow-hidden">
+      <div
+        class="absolute inset-0 z-0"
+        style="background-image: url('https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?q=80&w=2070&auto=format&fit=crop'); background-size: cover; background-position: center;"
+      >
+        <div class="absolute inset-0 bg-gradient-to-r from-tertiary/80 to-tertiary/60"></div>
+      </div>
+
+      <div class="relative h-full flex flex-col justify-center px-6 z-10">
+        <h1 class="text-2xl font-bold tracking-wide text-white">
+          Bienvenue, {user.user_metadata?.first_name} {user.user_metadata?.last_name}
+        </h1>
+        <p class="text-white/90">Votre espace délégué du personnel PREVICARE EMPLOI</p>
+        {user.user_metadata?.organization && (
+          <p class="text-sm text-white/70">{user.user_metadata.organization}</p>
+        )}
+      </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4 mb-6">
+      <div class="bg-white rounded-lg border shadow-sm p-4">
+        <div class="flex flex-row items-center justify-between space-y-0 pb-1 sm:pb-2">
+          <h3 class="text-xs sm:text-sm font-medium">Employés représentés</h3>
+          <svg class="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+          </svg>
+        </div>
+        <div>
+          <div class="text-lg sm:text-2xl font-bold">78</div>
+          <p class="text-[10px] sm:text-xs text-muted-foreground">Sur 3 départements</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg border shadow-sm p-4">
+        <div class="flex flex-row items-center justify-between space-y-0 pb-1 sm:pb-2">
+          <h3 class="text-xs sm:text-sm font-medium">Réunions à venir</h3>
+          <svg class="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 4V7a2 2 0 012-2h4a2 2 0 012 2v4M3 21h18M5 21l1-9h12l1 9"></path>
+          </svg>
+        </div>
+        <div>
+          <div class="text-lg sm:text-2xl font-bold">3</div>
+          <p class="text-[10px] sm:text-xs text-muted-foreground">Prochaine: 22/03/2025</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg border shadow-sm p-4">
+        <div class="flex flex-row items-center justify-between space-y-0 pb-1 sm:pb-2">
+          <h3 class="text-xs sm:text-sm font-medium">Consultations juridiques</h3>
+          <svg class="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+          </svg>
+        </div>
+        <div>
+          <div class="text-lg sm:text-2xl font-bold">12</div>
+          <p class="text-[10px] sm:text-xs text-muted-foreground">Dernière: 14/03/2025</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg border shadow-sm p-4">
+        <div class="flex flex-row items-center justify-between space-y-0 pb-1 sm:pb-2">
+          <h3 class="text-xs sm:text-sm font-medium">Notifications</h3>
+          <svg class="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM10.5 17H8a2 2 0 01-2-2V5a2 2 0 012-2h8a2 2 0 012 2v4.5"></path>
+          </svg>
+        </div>
+        <div>
+          <div class="text-lg sm:text-2xl font-bold">5</div>
+          <p class="text-[10px] sm:text-xs text-muted-foreground">Nouvelles notifications</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabs Section -->
+    <div class="mt-4 sm:mt-6">
+      <div class="bg-muted p-1 rounded-lg w-full grid grid-cols-3">
+        <button 
+          class="tab-button active flex items-center justify-center whitespace-nowrap rounded-md px-3 py-2 text-xs sm:text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-background text-foreground shadow"
+          data-tab="meetings"
+        >
+          Réunions
+        </button>
+        <button 
+          class="tab-button flex items-center justify-center whitespace-nowrap rounded-md px-3 py-2 text-xs sm:text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+          data-tab="documents"
+        >
+          Documents
+        </button>
+        <button 
+          class="tab-button flex items-center justify-center whitespace-nowrap rounded-md px-3 py-2 text-xs sm:text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+          data-tab="notifications"
+        >
+          Notifications
+        </button>
+      </div>
+
+      <!-- Tab Content -->
+      <div class="mt-4 space-y-4">
+        <!-- Meetings Tab -->
+        <div id="meetings-tab" class="tab-content">
+          <div class="bg-white rounded-lg border shadow-sm">
+            <div class="p-6 border-b">
+              <h3 class="text-lg font-semibold">Calendrier des réunions</h3>
+              <p class="text-sm text-muted-foreground">Gérez vos réunions et consultations avec la direction</p>
+            </div>
+            <div class="p-6">
+              <div class="space-y-4">
+                <div class="flex items-center justify-between p-4 border rounded-lg">
+                  <div>
+                    <h4 class="font-medium">Réunion CE - Budget Formation</h4>
+                    <p class="text-sm text-gray-600">22 Mars 2025 - 14h00</p>
+                  </div>
+                  <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">À venir</span>
+                </div>
+                <div class="flex items-center justify-between p-4 border rounded-lg">
+                  <div>
+                    <h4 class="font-medium">Négociation Accord RTT</h4>
+                    <p class="text-sm text-gray-600">28 Mars 2025 - 10h00</p>
+                  </div>
+                  <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">Planifiée</span>
+                </div>
+                <div class="flex items-center justify-between p-4 border rounded-lg">
+                  <div>
+                    <h4 class="font-medium">Suivi Conditions de Travail</h4>
+                    <p class="text-sm text-gray-600">5 Avril 2025 - 16h00</p>
+                  </div>
+                  <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Confirmée</span>
+                </div>
+              </div>
+            </div>
+            <div class="p-6 border-t flex justify-between">
+              <button class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4M3 21h18M5 21l1-9h12l1 9"></path>
+                </svg>
+                Voir le calendrier complet
+              </button>
+              <button class="inline-flex items-center px-4 py-2 bg-primary text-white rounded-md text-sm font-medium hover:bg-primary/90">
+                <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+                </svg>
+                Demander une réunion
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Documents Tab -->
+        <div id="documents-tab" class="tab-content hidden">
+          <div class="bg-white rounded-lg border shadow-sm">
+            <div class="p-6 border-b">
+              <h3 class="text-lg font-semibold">Documents importants</h3>
+              <p class="text-sm text-muted-foreground">Accédez aux accords collectifs et documents sociaux</p>
+            </div>
+            <div class="p-6">
+              <DocumentList client:load />
+            </div>
+            <div class="p-6 border-t flex justify-between">
+              <button class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                </svg>
+                Télécharger
+              </button>
+              <button class="inline-flex items-center px-4 py-2 bg-primary text-white rounded-md text-sm font-medium hover:bg-primary/90">
+                <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                </svg>
+                Ajouter un document
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Notifications Tab -->
+        <div id="notifications-tab" class="tab-content hidden">
+          <div class="bg-white rounded-lg border shadow-sm">
+            <div class="p-6 border-b">
+              <h3 class="text-lg font-semibold">Mes notifications</h3>
+              <p class="text-sm text-muted-foreground">Restez informé des mises à jour importantes</p>
+            </div>
+            <div class="p-6">
+              <NotificationList client:load />
+            </div>
+            <div class="p-6 border-t">
+              <button class="w-full inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                Marquer tout comme lu
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Suivi des réclamations -->
+    <div class="bg-white rounded-lg border shadow-sm mt-6">
+      <div class="p-6 border-b">
+        <h3 class="text-lg font-semibold">Suivi des réclamations</h3>
+        <p class="text-sm text-muted-foreground">État des réclamations et demandes des employés</p>
+      </div>
+      <div class="p-6">
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <svg class="h-5 w-5 text-primary mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2"></path>
+              </svg>
+              <div>
+                <h4 class="font-medium">Réclamations en cours</h4>
+                <div class="mt-2 space-y-2">
+                  <div class="flex justify-between text-sm">
+                    <span>Conditions de travail</span>
+                    <span class="font-medium">4</span>
+                  </div>
+                  <div class="flex justify-between text-sm">
+                    <span>Rémunération</span>
+                    <span class="font-medium">3</span>
+                  </div>
+                  <div class="flex justify-between text-sm">
+                    <span>Horaires</span>
+                    <span class="font-medium">2</span>
+                  </div>
+                  <div class="flex justify-between text-sm">
+                    <span>Formation</span>
+                    <span class="font-medium">1</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <svg class="h-5 w-5 text-primary mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.664-.833-2.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+              </svg>
+              <div>
+                <h4 class="font-medium">Alertes sociales</h4>
+                <p class="text-sm text-gray-600 mt-1">Aucune alerte sociale en cours</p>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-lg overflow-hidden h-[200px]">
+            <img
+              src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1000&auto=format&fit=crop"
+              alt="Graphique des réclamations"
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="p-6 border-t">
+        <button class="w-full inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+          <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+          </svg>
+          Enregistrer une nouvelle réclamation
+        </button>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(tab => {
+          tab.addEventListener('click', function(this: HTMLElement) {
+            const targetTab = this.getAttribute('data-tab');
+
+            // Remove active class from all buttons
+            tabButtons.forEach(btn => {
+              btn.classList.remove('active', 'bg-background', 'text-foreground', 'shadow');
+            });
+
+            // Add active class to clicked button
+            this.classList.add('active', 'bg-background', 'text-foreground', 'shadow');
+
+            // Hide all tab contents
+            tabContents.forEach(content => {
+              content.classList.add('hidden');
+            });
+
+            // Show target tab content
+            const targetContent = document.getElementById(targetTab + '-tab');
+            if (targetContent) {
+              targetContent.classList.remove('hidden');
+            }
+          });
+        });
+      });
+    </script>
+  </DashboardShell>
+</Layout>

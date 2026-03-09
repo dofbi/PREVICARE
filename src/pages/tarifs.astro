@@ -1,0 +1,421 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionContainer from '../components/SectionContainer.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+
+const { user } = Astro.locals;
+const isLoggedIn = !!user;
+
+const essentielUrl = isLoggedIn
+  ? '/espace-employes/abonnement/souscrire?plan=essentiel'
+  : '/inscription?redirect=' + encodeURIComponent('/espace-employes/abonnement/souscrire?plan=essentiel');
+
+const sereniteUrl = isLoggedIn
+  ? '/espace-employes/abonnement/souscrire?plan=serenite'
+  : '/inscription?redirect=' + encodeURIComponent('/espace-employes/abonnement/souscrire?plan=serenite');
+
+const integralUrl = isLoggedIn
+  ? '/espace-employes/abonnement/souscrire?plan=integral'
+  : '/inscription?redirect=' + encodeURIComponent('/espace-employes/abonnement/souscrire?plan=integral');
+---
+
+<Layout title="Tarifs - PREVICARE EMPLOI">
+  <main class="flex min-h-screen flex-col">
+    <!-- Hero Section -->
+    <section class="relative w-full pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden">
+      <div
+        class="absolute inset-0 z-0"
+        style="background-image: url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2070&auto=format&fit=crop'); background-size: cover; background-position: center;"
+      >
+        <div class="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/70"></div>
+      </div>
+      <div class="container relative px-4 md:px-6 z-10">
+        <div class="flex flex-col items-center text-center space-y-4">
+          <h1 class="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-white">
+            Des formules adaptees a chaque profil
+          </h1>
+          <p class="max-w-[700px] text-white/90 md:text-xl">
+            Travailleurs, employeurs, delegues ou expatries : choisissez l'offre qui correspond a vos besoins.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tabs Navigation -->
+    <SectionContainer background="white">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex flex-wrap justify-center gap-2 mb-12" id="tabs-nav">
+          <button data-tab="employes" class="tab-btn px-6 py-3 rounded-full text-sm font-semibold transition-all duration-200 bg-primary text-white shadow-md">
+            Travailleurs
+          </button>
+          <button data-tab="employeurs" class="tab-btn px-6 py-3 rounded-full text-sm font-semibold transition-all duration-200 bg-gray-100 text-gray-700 hover:bg-gray-200">
+            Employeurs
+          </button>
+          <button data-tab="delegues" class="tab-btn px-6 py-3 rounded-full text-sm font-semibold transition-all duration-200 bg-gray-100 text-gray-700 hover:bg-gray-200">
+            Delegues
+          </button>
+          <button data-tab="expatries" class="tab-btn px-6 py-3 rounded-full text-sm font-semibold transition-all duration-200 bg-gray-100 text-gray-700 hover:bg-gray-200">
+            Expatries
+          </button>
+          <button data-tab="acte" class="tab-btn px-6 py-3 rounded-full text-sm font-semibold transition-all duration-200 bg-gray-100 text-gray-700 hover:bg-gray-200">
+            A l'acte
+          </button>
+        </div>
+
+        <!-- Tab: Travailleurs -->
+        <div id="tab-employes" class="tab-content">
+          <div class="grid md:grid-cols-3 gap-8 items-stretch">
+            <!-- Essentiel -->
+            <div class="bg-white rounded-2xl shadow-md border border-gray-200 flex flex-col overflow-hidden">
+              <div class="p-8 border-b bg-gradient-to-br from-blue-50 to-white">
+                <h3 class="text-lg font-bold text-primary">PREVICARE Essentiel</h3>
+                <p class="text-xs text-gray-500 mb-3">(Basique)</p>
+                <div class="flex items-baseline">
+                  <span class="text-4xl font-extrabold text-gray-900">4 990</span>
+                  <span class="ml-2 text-lg text-gray-500">FCFA/mois</span>
+                </div>
+              </div>
+              <div class="p-8 flex-grow">
+                <h4 class="text-xs font-bold text-primary uppercase tracking-wider mb-3">Outils</h4>
+                <ul class="space-y-2 mb-6">
+                  <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Archivage securise et consultation facile des documents RH</li>
+                  <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Visionneuse Juritheque</li>
+                </ul>
+                <h4 class="text-xs font-bold text-primary uppercase tracking-wider mb-3">Services</h4>
+                <p class="text-sm text-gray-400 italic">Aucun service inclus a ce niveau</p>
+              </div>
+              <div class="p-8 pt-0">
+                <a href={essentielUrl} class="block w-full text-center px-6 py-3 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary hover:text-white transition-all">
+                  Choisir Essentiel
+                </a>
+              </div>
+            </div>
+
+            <!-- Serenite -->
+            <div class="bg-white rounded-2xl shadow-xl border-2 border-primary flex flex-col overflow-hidden relative">
+              <div class="absolute top-0 right-4 bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-b-lg">Recommande</div>
+              <div class="p-8 border-b bg-gradient-to-br from-primary/5 to-white">
+                <h3 class="text-lg font-bold text-primary">PREVICARE Serenite</h3>
+                <p class="text-xs text-gray-500 mb-3">(Premium)</p>
+                <div class="flex items-baseline">
+                  <span class="text-4xl font-extrabold text-gray-900">9 900</span>
+                  <span class="ml-2 text-lg text-gray-500">FCFA/mois</span>
+                </div>
+              </div>
+              <div class="p-8 flex-grow">
+                <h4 class="text-xs font-bold text-primary uppercase tracking-wider mb-3">Outils</h4>
+                <ul class="space-y-2 mb-6">
+                  <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Archivage securise docs RH</li>
+                  <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Visionneuse Juritheque</li>
+                  <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Consultant RH "SETLOU" (50 000 tokens/mois)</li>
+                  <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Assistant "Xalima" (50 000 tokens/mois)</li>
+                </ul>
+                <h4 class="text-xs font-bold text-primary uppercase tracking-wider mb-3">Services</h4>
+                <ul class="space-y-2">
+                  <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Conseil RH/juridique gestion conflits</li>
+                  <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Acces offres d'emploi</li>
+                </ul>
+              </div>
+              <div class="p-8 pt-0">
+                <a href={sereniteUrl} class="block w-full text-center px-6 py-3 bg-gradient-to-r from-primary to-primary-dark text-white font-semibold rounded-lg hover:shadow-lg transition-all">
+                  Choisir Serenite
+                </a>
+              </div>
+            </div>
+
+            <!-- Integral -->
+            <div class="bg-white rounded-2xl shadow-md border border-gray-200 flex flex-col overflow-hidden">
+              <div class="p-8 border-b bg-gradient-to-br from-amber-50 to-white">
+                <h3 class="text-lg font-bold text-amber-700">PREVICARE Integral</h3>
+                <p class="text-xs text-gray-500 mb-3">(Gold)</p>
+                <div class="flex items-baseline">
+                  <span class="text-4xl font-extrabold text-gray-900">19 900</span>
+                  <span class="ml-2 text-lg text-gray-500">FCFA/mois</span>
+                </div>
+              </div>
+              <div class="p-8 flex-grow">
+                <h4 class="text-xs font-bold text-primary uppercase tracking-wider mb-3">Outils</h4>
+                <ul class="space-y-2 mb-6">
+                  <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Archivage securise docs RH</li>
+                  <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Visionneuse Juritheque</li>
+                  <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Consultant RH "SETLOU" (100 000 tokens/mois)</li>
+                  <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Assistant "Xalima" (100 000 tokens/mois)</li>
+                  <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Veille juridique mensuelle</li>
+                </ul>
+                <h4 class="text-xs font-bold text-primary uppercase tracking-wider mb-3">Services</h4>
+                <ul class="space-y-2">
+                  <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Defense juridique complete</li>
+                  <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Assistance preventive contrat de travail</li>
+                  {/* <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Coaching carriere (30 min/mois sur RDV)</li> */}
+                  <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Acces offres d'emploi</li>
+                </ul>
+              </div>
+              <div class="p-8 pt-0">
+                <a href={integralUrl} class="block w-full text-center px-6 py-3 border-2 border-amber-600 text-amber-700 font-semibold rounded-lg hover:bg-amber-600 hover:text-white transition-all">
+                  Choisir Integral
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab: Employeurs -->
+        <div id="tab-employeurs" class="tab-content hidden">
+          <div class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-2xl shadow-lg border border-primary/10 overflow-hidden">
+              <div class="p-8 border-b bg-gradient-to-br from-primary/5 to-secondary/5">
+                <h3 class="text-2xl font-bold text-gray-900">Offre Employeurs</h3>
+                <p class="text-gray-500 mb-4">Entreprises privees et parapubliques</p>
+                <div class="text-3xl font-extrabold text-primary">Tarification : sur demande</div>
+                <p class="text-sm text-gray-500 mt-2">Selon les outils et services souscrits</p>
+              </div>
+              <div class="p-8">
+                <div class="grid md:grid-cols-2 gap-8">
+                  <div>
+                    <h4 class="text-xs font-bold text-primary uppercase tracking-wider mb-4">Outils</h4>
+                    <ul class="space-y-3">
+                      <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Archivage numerique securise docs RH employes</li>
+                      <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Consultant RH "SETLOU" (3 000 000 tokens)</li>
+                      <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Visionneuse Juritheque</li>
+                      <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Assistant "Xalima" (3 000 000 tokens/mois)</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 class="text-xs font-bold text-secondary uppercase tracking-wider mb-4">Services</h4>
+                    <ul class="space-y-3">
+                      <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Canal Whistleblower</li>
+                      <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Investigations RH internes independantes</li>
+                  <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Mediation sociale</li>
+                  {/* <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Verification cotisations IPRES sous-traitants</li> */}
+                  <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Gestion permis de travail expatries</li>
+                      <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Audit facturation societes interimaires</li>
+                      <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Gestion proactive risques RH/juridiques</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="p-8 pt-0">
+                <a href="/contact" class="inline-flex items-center justify-center px-8 py-3 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-lg hover:shadow-lg transition-all w-full md:w-auto">
+                  Demander un devis
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab: Delegues -->
+        <div id="tab-delegues" class="tab-content hidden">
+          <div class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-2xl shadow-lg border border-primary/10 overflow-hidden">
+              <div class="p-8 border-b bg-gradient-to-br from-primary/5 to-tertiary/5 text-center">
+                <h3 class="text-2xl font-bold text-gray-900">Offre Delegues du Personnel</h3>
+                <p class="text-gray-500 mb-4">Entreprises privees et parapubliques</p>
+                <div class="text-5xl font-extrabold text-primary">600 000 FCFA</div>
+                <p class="text-lg text-gray-500 mt-1">par trimestre</p>
+                <p class="text-xs text-gray-400 mt-2 italic">A l'exclusion des prestations listees ci-dessous</p>
+              </div>
+              <div class="p-8">
+                <div class="grid md:grid-cols-2 gap-8">
+                  <div>
+                    <h4 class="text-xs font-bold text-primary uppercase tracking-wider mb-4">Outils</h4>
+                    <ul class="space-y-3">
+                      <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Consultant RH "SETLOU" (5 000 000 tokens)</li>
+                      <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Archivage numerique (PV, accords, conventions)</li>
+                      <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Visionneuse Juritheque</li>
+                      <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Assistant "Xalima" (3 000 000 tokens/mois)</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 class="text-xs font-bold text-tertiary uppercase tracking-wider mb-4">Services</h4>
+                    <ul class="space-y-3">
+                      <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Negociation sociale et accords collectifs</li>
+                      <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Conflit social</li>
+                      <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Audit social et benchmark sectoriel</li>
+                      <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Redaction/validation accords sociaux</li>
+                      <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Formation gestion conflits</li>
+                      <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Veille juridique mensuelle</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="p-8 pt-0 flex flex-col sm:flex-row gap-4">
+                <a href="/contact" class="inline-flex items-center justify-center px-8 py-3 bg-gradient-to-r from-primary to-primary-dark text-white font-semibold rounded-lg hover:shadow-lg transition-all">
+                  Souscrire
+                </a>
+                <a href="/contact" class="inline-flex items-center justify-center px-8 py-3 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary hover:text-white transition-all">
+                  Nous contacter
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab: Expatries -->
+        <div id="tab-expatries" class="tab-content hidden">
+          <div class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-2xl shadow-lg border border-secondary/10 overflow-hidden">
+              <div class="p-8 border-b bg-gradient-to-br from-secondary/5 to-tertiary/5">
+                <div class="flex items-center justify-between flex-wrap gap-4">
+                  <div>
+                    <h3 class="text-2xl font-bold text-gray-900">Offre Expatries</h3>
+                    <p class="text-gray-500 mb-4">Travailleurs expatries d'entreprises privees</p>
+                    <div class="text-3xl font-extrabold text-secondary">Tarification : sur demande</div>
+                  </div>
+                  <div class="inline-flex items-center px-4 py-2 rounded-full bg-tertiary/10 text-tertiary font-medium text-sm">
+                    Version anglaise disponible
+                  </div>
+                </div>
+              </div>
+              <div class="p-8">
+                <div class="grid md:grid-cols-2 gap-8">
+                  <div>
+                    <h4 class="text-xs font-bold text-secondary uppercase tracking-wider mb-4">Outils</h4>
+                    <ul class="space-y-3">
+                      <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Archivage numerique securise docs RH</li>
+                      <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Consultant RH "SETLOU" (1 000 000 tokens)</li>
+                      <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Visionneuse Juritheque</li>
+                      <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Assistant "Xalima" (1 000 000 tokens/mois)</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 class="text-xs font-bold text-tertiary uppercase tracking-wider mb-4">Services</h4>
+                    <ul class="space-y-3">
+                      <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Conseils juridiques specialises</li>
+                      <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Defense juridique complete</li>
+                      <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Veille juridique mensuelle</li>
+                      {/* <li class="flex items-start text-sm"><svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Suivi/verification cotisations IPRES</li> */}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="p-8 pt-0">
+                <a href="/contact" class="inline-flex items-center justify-center px-8 py-3 bg-gradient-to-r from-secondary to-tertiary text-white font-semibold rounded-lg hover:shadow-lg transition-all w-full md:w-auto">
+                  Demander un devis
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab: A l'acte -->
+        <div id="tab-acte" class="tab-content hidden">
+          <div class="max-w-3xl mx-auto">
+            <div class="bg-white rounded-2xl shadow-lg border overflow-hidden">
+              <div class="p-8 border-b bg-gradient-to-br from-tertiary/5 to-white text-center">
+                <h3 class="text-2xl font-bold text-gray-900">Consultations ponctuelles</h3>
+                <p class="text-gray-500">Sans abonnement, a la demande</p>
+              </div>
+              <div class="p-8">
+                <h4 class="text-sm font-semibold text-gray-700 mb-4">Modes de consultation :</h4>
+                <p class="text-sm text-gray-600 mb-8">Par voie electronique (email, WhatsApp, telephone, visioconference) ou en presentiel</p>
+
+                <h4 class="text-sm font-semibold text-gray-700 mb-4">Tarifs par consultation :</h4>
+                <div class="overflow-hidden rounded-lg border">
+                  <table class="w-full">
+                    <thead>
+                      <tr class="bg-tertiary/5">
+                        <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Profil</th>
+                        <th class="px-6 py-4 text-right text-sm font-semibold text-gray-900">Prix / consultation</th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y">
+                      <tr class="hover:bg-gray-50"><td class="px-6 py-4 text-sm">Employe</td><td class="px-6 py-4 text-sm font-semibold text-right">15 000 FCFA</td></tr>
+                      <tr class="hover:bg-gray-50"><td class="px-6 py-4 text-sm">Agent de maitrise / Technicien assimile</td><td class="px-6 py-4 text-sm font-semibold text-right">25 000 FCFA</td></tr>
+                      <tr class="hover:bg-gray-50"><td class="px-6 py-4 text-sm">Expatrie</td><td class="px-6 py-4 text-sm font-semibold text-right">40 000 FCFA</td></tr>
+                      <tr class="hover:bg-gray-50"><td class="px-6 py-4 text-sm">Cadre</td><td class="px-6 py-4 text-sm font-semibold text-right">42 900 FCFA</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="p-8 pt-0">
+                <a href="/contact" class="inline-flex items-center justify-center px-8 py-3 bg-gradient-to-r from-tertiary to-tertiary text-white font-semibold rounded-lg hover:shadow-lg transition-all w-full md:w-auto">
+                  Prendre rendez-vous
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </SectionContainer>
+
+    <!-- FAQ Section -->
+    <SectionContainer background="accent">
+      <SectionTitle
+        title="Questions frequentes"
+        badge="FAQ"
+        badgeVariant="secondary"
+        subtitle="Retrouvez les reponses aux questions les plus courantes sur nos offres."
+      />
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        {[
+          {
+            question: "Quelle est la difference entre Essentiel, Serenite et Integral ?",
+            answer: "Essentiel vous donne acces aux outils de base (archivage, Juritheque). Serenite ajoute les assistants IA (SETLOU et Xalima) et le conseil en gestion de conflits. Integral inclut la defense juridique complete et l'assistance preventive.",
+          },
+          {
+            question: "Comment fonctionne la tarification employeurs ?",
+            answer: "La tarification est sur demande car elle depend des outils et services souscrits. Contactez-nous pour un devis personnalise.",
+          },
+          {
+            question: "Que comprend l'offre delegues ?",
+            answer: "Pour 600 000 FCFA/trimestre, vous beneficiez de tous les outils digitaux (SETLOU, archivage, Juritheque, Xalima) et de 6 services specialises pour le dialogue social.",
+          },
+          {
+            question: "Les expatries peuvent-ils consulter a l'acte ?",
+            answer: "Oui, une consultation ponctuelle pour un expatrie coute 40 000 FCFA, sans engagement.",
+          },
+          {
+            question: "Comment puis-je changer de formule ?",
+            answer: "Vous pouvez facilement changer de formule a tout moment depuis votre espace personnel.",
+          },
+          {
+            question: "Les prix incluent-ils la TVA ?",
+            answer: "Oui, tous nos prix affiches incluent la TVA et toutes les taxes applicables au Senegal.",
+          },
+          {
+            question: "Puis-je annuler mon abonnement ?",
+            answer: "Oui, vous pouvez annuler votre abonnement a tout moment sans frais supplementaires.",
+          },
+          {
+            question: "Comment fonctionne le paiement a l'acte ?",
+            answer: "Vous pouvez prendre rendez-vous pour une consultation unique via notre plateforme et payer de maniere securisee par mobile money ou carte bancaire, sans abonnement.",
+          },
+        ].map((faq) => (
+          <div class="space-y-2">
+            <div class="flex items-start">
+              <svg class="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <h3 class="font-semibold text-lg">{faq.question}</h3>
+            </div>
+            <p class="text-gray-600 pl-7">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </SectionContainer>
+  </main>
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('.tab-btn');
+    const contents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.getAttribute('data-tab');
+
+        tabs.forEach(t => {
+          t.classList.remove('bg-primary', 'text-white', 'shadow-md');
+          t.classList.add('bg-gray-100', 'text-gray-700');
+        });
+        tab.classList.remove('bg-gray-100', 'text-gray-700');
+        tab.classList.add('bg-primary', 'text-white', 'shadow-md');
+
+        contents.forEach(c => c.classList.add('hidden'));
+        const targetEl = document.getElementById('tab-' + target);
+        if (targetEl) targetEl.classList.remove('hidden');
+      });
+    });
+  });
+</script>

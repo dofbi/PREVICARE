@@ -1,0 +1,484 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionContainer from '../components/SectionContainer.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+
+const { user } = Astro.locals;
+const isLoggedIn = !!user;
+const isEmployee = user?.user_metadata?.role === 'employee';
+
+const essentielUrl = isLoggedIn
+  ? '/espace-employes/abonnement/souscrire?plan=essentiel'
+  : '/inscription?redirect=' + encodeURIComponent('/espace-employes/abonnement/souscrire?plan=essentiel');
+
+const sereniteUrl = isLoggedIn
+  ? '/espace-employes/abonnement/souscrire?plan=serenite'
+  : '/inscription?redirect=' + encodeURIComponent('/espace-employes/abonnement/souscrire?plan=serenite');
+
+const integralUrl = isLoggedIn
+  ? '/espace-employes/abonnement/souscrire?plan=integral'
+  : '/inscription?redirect=' + encodeURIComponent('/espace-employes/abonnement/souscrire?plan=integral');
+---
+
+<Layout title="Protection RH pour les Travailleurs - PREVICARE">
+  <main class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-yellow-50">
+    <!-- Hero Section -->
+    <section class="relative py-20 px-4 text-center bg-gradient-to-r from-primary via-primary-dark to-primary text-white">
+      <div class="absolute inset-0 bg-black/10"></div>
+      <div class="relative max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+          Protection RH et Juridique pour les Travailleurs
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 text-blue-100">
+          Securisez vos documents, consultez la Juritheque et beneficiez d'un accompagnement personnalise.
+        </p>
+        <a
+          href="#formules"
+          class="inline-flex items-center px-8 py-4 bg-white text-primary font-semibold rounded-lg hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+        >
+          Decouvrir nos formules
+          <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- Section Outils de base -->
+    <SectionContainer>
+      <SectionTitle
+        title="Outils de base"
+        badge="Inclus dans toutes les formules"
+        badgeVariant="primary"
+        subtitle="Des outils essentiels pour securiser vos documents et acceder aux references juridiques."
+      />
+      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div class="bg-white rounded-xl shadow-md p-8 border border-primary/10 hover:shadow-lg transition-shadow">
+          <div class="flex items-center mb-4">
+            <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mr-4">
+              <svg class="h-7 w-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900">Archivage securise des documents RH</h3>
+          </div>
+          <ul class="text-gray-600 space-y-2 ml-1">
+            <li class="flex items-start">
+              <span class="text-primary mr-2 mt-1">&#8226;</span>
+              Contrats, attestations, bulletins de salaire
+            </li>
+            <li class="flex items-start">
+              <span class="text-primary mr-2 mt-1">&#8226;</span>
+              Securisez vos pieces essentielles et evitez la perte ou dispersion des preuves
+            </li>
+            <li class="flex items-start">
+              <span class="text-primary mr-2 mt-1">&#8226;</span>
+              Acces immediat en cas de controle ou de litige
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md p-8 border border-primary/10 hover:shadow-lg transition-shadow">
+          <div class="flex items-center mb-4">
+            <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mr-4">
+              <svg class="h-7 w-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900">Visionneuse Juritheque</h3>
+          </div>
+          <ul class="text-gray-600 space-y-2 ml-1">
+            <li class="flex items-start">
+              <span class="text-primary mr-2 mt-1">&#8226;</span>
+              Acces rapide aux references juridiques
+            </li>
+            <li class="flex items-start">
+              <span class="text-primary mr-2 mt-1">&#8226;</span>
+              Base documentaire fiable pour lever l'incertitude
+            </li>
+          </ul>
+        </div>
+      </div>
+    </SectionContainer>
+
+    <!-- Section Outils IA avances -->
+    <SectionContainer background="accent">
+      <SectionTitle
+        title="Outils IA avances"
+        badge="Serenite & Integral"
+        badgeVariant="secondary"
+        subtitle="Des assistants intelligents pour repondre a vos questions RH et produire des ecrits professionnels."
+      />
+      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div class="bg-white rounded-xl shadow-md p-8 border border-secondary/20 hover:shadow-lg transition-shadow">
+          <div class="flex items-center mb-4">
+            <div class="w-14 h-14 bg-secondary/10 rounded-xl flex items-center justify-center mr-4">
+              <svg class="h-7 w-7 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900">Consultant RH digital "SETLOU"</h3>
+          </div>
+          <ul class="text-gray-600 space-y-2 ml-1">
+            <li class="flex items-start">
+              <span class="text-secondary mr-2 mt-1">&#8226;</span>
+              Repond rapidement aux questions RH/juridiques courantes
+            </li>
+            <li class="flex items-start">
+              <span class="text-secondary mr-2 mt-1">&#8226;</span>
+              Reduit le stress et les retards de decision
+            </li>
+          </ul>
+          <div class="mt-4 flex gap-3">
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">Serenite : 50 000 tokens/mois</span>
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800">Integral : 100 000 tokens/mois</span>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md p-8 border border-secondary/20 hover:shadow-lg transition-shadow">
+          <div class="flex items-center mb-4">
+            <div class="w-14 h-14 bg-secondary/10 rounded-xl flex items-center justify-center mr-4">
+              <svg class="h-7 w-7 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900">Assistant redactionnel "Xalima"</h3>
+          </div>
+          <ul class="text-gray-600 space-y-2 ml-1">
+            <li class="flex items-start">
+              <span class="text-secondary mr-2 mt-1">&#8226;</span>
+              Aide a produire des ecrits clairs (demandes, courriers, reponses)
+            </li>
+            <li class="flex items-start">
+              <span class="text-secondary mr-2 mt-1">&#8226;</span>
+              Style professionnel et conforme
+            </li>
+          </ul>
+          <div class="mt-4 flex gap-3">
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">Serenite : 50 000 tokens/mois</span>
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800">Integral : 100 000 tokens/mois</span>
+          </div>
+        </div>
+      </div>
+    </SectionContainer>
+
+    <!-- Section Comparatif 3 formules -->
+    <SectionContainer id="formules">
+      <SectionTitle
+        title="Comparez nos formules"
+        badge="3 formules"
+        badgeVariant="primary"
+        subtitle="Choisissez la formule adaptee a vos besoins, de l'essentiel a la protection maximale."
+      />
+      <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto items-stretch">
+        <!-- Essentiel -->
+        <div class="bg-white rounded-2xl shadow-md border border-gray-200 flex flex-col overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="p-8 border-b bg-gradient-to-br from-blue-50 to-white">
+            <h3 class="text-sm font-semibold text-primary uppercase tracking-wider mb-1">Essentiel</h3>
+            <p class="text-xs text-gray-500 mb-4">(Basique)</p>
+            <div class="flex items-baseline">
+              <span class="text-4xl font-extrabold text-gray-900">4 990</span>
+              <span class="ml-2 text-lg font-medium text-gray-500">FCFA/mois</span>
+            </div>
+          </div>
+          <div class="p-8 flex-grow">
+            <div class="mb-6">
+              <h4 class="text-xs font-bold text-primary uppercase tracking-wider mb-3">Outils</h4>
+              <ul class="space-y-2">
+                <li class="flex items-start text-sm">
+                  <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  Archivage securise docs RH
+                </li>
+                <li class="flex items-start text-sm">
+                  <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  Visionneuse Juritheque
+                </li>
+                <li class="flex items-start text-sm text-gray-400">
+                  <svg class="h-5 w-5 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                  SETLOU (IA RH)
+                </li>
+                <li class="flex items-start text-sm text-gray-400">
+                  <svg class="h-5 w-5 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                  Xalima (redaction)
+                </li>
+                <li class="flex items-start text-sm text-gray-400">
+                  <svg class="h-5 w-5 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                  Veille juridique
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="text-xs font-bold text-primary uppercase tracking-wider mb-3">Services</h4>
+              <p class="text-sm text-gray-400 italic">Aucun service inclus</p>
+            </div>
+          </div>
+          <div class="p-8 pt-0">
+            <a
+              href={essentielUrl}
+              class="block w-full text-center px-6 py-3 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
+            >
+              {isLoggedIn ? 'Choisir Essentiel' : "S'inscrire"}
+            </a>
+          </div>
+        </div>
+
+        <!-- Serenite (mise en avant) -->
+        <div class="bg-white rounded-2xl shadow-xl border-2 border-primary flex flex-col overflow-hidden relative hover:shadow-2xl transition-shadow">
+          <div class="absolute top-0 right-4 -mt-0 bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-b-lg">
+            Recommande
+          </div>
+          <div class="p-8 border-b bg-gradient-to-br from-primary/5 to-white">
+            <h3 class="text-sm font-semibold text-primary uppercase tracking-wider mb-1">Serenite</h3>
+            <p class="text-xs text-gray-500 mb-4">(Premium)</p>
+            <div class="flex items-baseline">
+              <span class="text-4xl font-extrabold text-gray-900">9 900</span>
+              <span class="ml-2 text-lg font-medium text-gray-500">FCFA/mois</span>
+            </div>
+          </div>
+          <div class="p-8 flex-grow">
+            <div class="mb-6">
+              <h4 class="text-xs font-bold text-primary uppercase tracking-wider mb-3">Outils</h4>
+              <ul class="space-y-2">
+                <li class="flex items-start text-sm">
+                  <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  Archivage securise docs RH
+                </li>
+                <li class="flex items-start text-sm">
+                  <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  Visionneuse Juritheque
+                </li>
+                <li class="flex items-start text-sm">
+                  <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  SETLOU (50 000 tokens/mois)
+                </li>
+                <li class="flex items-start text-sm">
+                  <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  Xalima (50 000 tokens/mois)
+                </li>
+                <li class="flex items-start text-sm text-gray-400">
+                  <svg class="h-5 w-5 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                  Veille juridique
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="text-xs font-bold text-primary uppercase tracking-wider mb-3">Services</h4>
+              <ul class="space-y-2">
+                <li class="flex items-start text-sm">
+                  <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  Conseil RH/juridique gestion conflits
+                </li>
+                <li class="flex items-start text-sm">
+                  <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  Acces offres d'emploi
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="p-8 pt-0">
+            <a
+              href={sereniteUrl}
+              class="block w-full text-center px-6 py-3 bg-gradient-to-r from-primary to-primary-dark text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300"
+            >
+              {isLoggedIn ? 'Choisir Serenite' : "S'inscrire"}
+            </a>
+          </div>
+        </div>
+
+        <!-- Integral -->
+        <div class="bg-white rounded-2xl shadow-md border border-gray-200 flex flex-col overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="p-8 border-b bg-gradient-to-br from-amber-50 to-white">
+            <h3 class="text-sm font-semibold text-amber-700 uppercase tracking-wider mb-1">Integral</h3>
+            <p class="text-xs text-gray-500 mb-4">(Gold)</p>
+            <div class="flex items-baseline">
+              <span class="text-4xl font-extrabold text-gray-900">19 900</span>
+              <span class="ml-2 text-lg font-medium text-gray-500">FCFA/mois</span>
+            </div>
+          </div>
+          <div class="p-8 flex-grow">
+            <div class="mb-6">
+              <h4 class="text-xs font-bold text-primary uppercase tracking-wider mb-3">Outils</h4>
+              <ul class="space-y-2">
+                <li class="flex items-start text-sm">
+                  <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  Archivage securise docs RH
+                </li>
+                <li class="flex items-start text-sm">
+                  <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  Visionneuse Juritheque
+                </li>
+                <li class="flex items-start text-sm">
+                  <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  SETLOU (100 000 tokens/mois)
+                </li>
+                <li class="flex items-start text-sm">
+                  <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  Xalima (100 000 tokens/mois)
+                </li>
+                <li class="flex items-start text-sm">
+                  <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  Veille juridique mensuelle
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="text-xs font-bold text-primary uppercase tracking-wider mb-3">Services</h4>
+              <ul class="space-y-2">
+                <li class="flex items-start text-sm">
+                  <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  Defense juridique complete
+                </li>
+                <li class="flex items-start text-sm">
+                  <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  Assistance preventive contrat
+                </li>
+                {/* <li class="flex items-start text-sm">
+                  <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  Coaching carriere (30 min/mois)
+                </li> */}
+                <li class="flex items-start text-sm">
+                  <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  Acces offres d'emploi
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="p-8 pt-0">
+            <a
+              href={integralUrl}
+              class="block w-full text-center px-6 py-3 border-2 border-amber-600 text-amber-700 font-semibold rounded-lg hover:bg-amber-600 hover:text-white transition-all duration-300"
+            >
+              {isLoggedIn ? 'Choisir Integral' : "S'inscrire"}
+            </a>
+          </div>
+        </div>
+      </div>
+    </SectionContainer>
+
+    <!-- Section Services detailles -->
+    <SectionContainer background="accent">
+      <SectionTitle
+        title="Services detailles"
+        subtitle="Decouvrez en detail les services inclus dans les formules Serenite et Integral."
+      />
+      <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div class="bg-white rounded-xl shadow-md p-8 border-l-4 border-l-purple-500">
+          <div class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800 mb-4">Serenite</div>
+          <h3 class="text-lg font-bold text-gray-900 mb-3">Conseil RH et juridique en gestion des conflits</h3>
+          <ul class="text-gray-600 space-y-2 text-sm">
+            <li class="flex items-start"><span class="text-purple-500 mr-2 mt-0.5">&#8226;</span>Cadre vos demarches</li>
+            <li class="flex items-start"><span class="text-purple-500 mr-2 mt-0.5">&#8226;</span>Securise vos choix (negociation, courrier, procedure)</li>
+            <li class="flex items-start"><span class="text-purple-500 mr-2 mt-0.5">&#8226;</span>Reduit le risque d'erreur prejudiciable</li>
+          </ul>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md p-8 border-l-4 border-l-amber-500">
+          <div class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800 mb-4">Integral</div>
+          <h3 class="text-lg font-bold text-gray-900 mb-3">Defense juridique complete</h3>
+          <ul class="text-gray-600 space-y-2 text-sm">
+            <li class="flex items-start"><span class="text-amber-500 mr-2 mt-0.5">&#8226;</span>Procedures disciplinaires</li>
+            <li class="flex items-start"><span class="text-amber-500 mr-2 mt-0.5">&#8226;</span>Licenciements abusifs</li>
+            <li class="flex items-start"><span class="text-amber-500 mr-2 mt-0.5">&#8226;</span>Non-paiement de salaire</li>
+            <li class="flex items-start"><span class="text-amber-500 mr-2 mt-0.5">&#8226;</span>Prise en charge de la strategie et de la defense</li>
+          </ul>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md p-8 border-l-4 border-l-amber-500">
+          <div class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800 mb-4">Integral</div>
+          <h3 class="text-lg font-bold text-gray-900 mb-3">Assistance preventive sur le contrat de travail</h3>
+          <ul class="text-gray-600 space-y-2 text-sm">
+            <li class="flex items-start"><span class="text-amber-500 mr-2 mt-0.5">&#8226;</span>Demandes d'explications</li>
+            <li class="flex items-start"><span class="text-amber-500 mr-2 mt-0.5">&#8226;</span>Avenants</li>
+            <li class="flex items-start"><span class="text-amber-500 mr-2 mt-0.5">&#8226;</span>Assistance avant de repondre, signer ou accepter une modification</li>
+          </ul>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md p-8 border-l-4 border-l-amber-500">
+          <div class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800 mb-4">Integral</div>
+          <h3 class="text-lg font-bold text-gray-900 mb-3">Coaching carriere</h3>
+          <ul class="text-gray-600 space-y-2 text-sm">
+            <li class="flex items-start"><span class="text-amber-500 mr-2 mt-0.5">&#8226;</span>Conseils et orientation professionnelle</li>
+            <li class="flex items-start"><span class="text-amber-500 mr-2 mt-0.5">&#8226;</span>Coaching individuel (maximum 30 minutes/mois sur RDV)</li>
+            <li class="flex items-start"><span class="text-amber-500 mr-2 mt-0.5">&#8226;</span>Clarifie les options (evolution, mobilite, competences)</li>
+          </ul>
+        </div>
+      </div>
+    </SectionContainer>
+
+    <!-- Section Consultations a l'acte -->
+    <SectionContainer>
+      <SectionTitle
+        title="Consultations ponctuelles"
+        badge="Sans abonnement"
+        badgeVariant="tertiary"
+        subtitle="Besoin d'un conseil ponctuel ? Consultez nos experts a l'acte."
+      />
+      <div class="max-w-2xl mx-auto">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden border">
+          <table class="w-full">
+            <thead>
+              <tr class="bg-tertiary/5">
+                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Profil</th>
+                <th class="px-6 py-4 text-right text-sm font-semibold text-gray-900">Prix / consultation</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y">
+              <tr class="hover:bg-gray-50">
+                <td class="px-6 py-4 text-sm text-gray-700">Employe</td>
+                <td class="px-6 py-4 text-sm text-gray-900 font-semibold text-right">15 000 FCFA</td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="px-6 py-4 text-sm text-gray-700">Agent de maitrise / Technicien</td>
+                <td class="px-6 py-4 text-sm text-gray-900 font-semibold text-right">25 000 FCFA</td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="px-6 py-4 text-sm text-gray-700">Cadre</td>
+                <td class="px-6 py-4 text-sm text-gray-900 font-semibold text-right">42 900 FCFA</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="px-6 py-4 bg-gray-50 border-t">
+            <p class="text-sm text-gray-600">
+              <span class="font-medium">Modes :</span> email, WhatsApp, telephone, visioconference, presentiel
+            </p>
+          </div>
+        </div>
+      </div>
+    </SectionContainer>
+
+    <!-- Section CTA final -->
+    <SectionContainer background="accent">
+      <div class="text-center max-w-2xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">
+          Pret a securiser votre parcours professionnel ?
+        </h2>
+        <p class="text-lg text-gray-600 mb-8">
+          Rejoignez PREVICARE et beneficiez d'une protection RH et juridique adaptee a vos besoins.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          {isLoggedIn ? (
+            <a
+              href="/espace-employes/abonnement/souscrire"
+              class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-primary to-primary-dark text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+            >
+              Choisir ma formule
+            </a>
+          ) : (
+            <a
+              href="/inscription"
+              class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-primary to-primary-dark text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+            >
+              S'inscrire maintenant
+            </a>
+          )}
+          <a
+            href="/tarifs"
+            class="inline-flex items-center justify-center px-8 py-4 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
+          >
+            Voir tous les tarifs
+          </a>
+        </div>
+      </div>
+    </SectionContainer>
+  </main>
+</Layout>
